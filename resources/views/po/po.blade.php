@@ -147,10 +147,10 @@
                                                     <tr>
                                                         <th>no</th>
                                                         <th>No PO</th>
-                                                        <th>Nama Barang</th>
-                                                        <th>Jumlah</th>
+                                                        <!-- <th>Nama Barang</th> -->
+                                                        <!-- <th>Jumlah</th> -->
                                                         <th>Created at</th>
-                                                        <th>Keterangan</th>
+                                                        <!-- <th>Keterangan</th> -->
                                                         <th>Status</th>
                                                         <th>Aksi</th>
                                                     </tr>
@@ -208,10 +208,10 @@
                                                         @elseif (auth()->user()->divisi == "warehouse")
                                                         <td>{{ $no++ }}</td>
                                                         <td>{{ $data_po->no_PO}}</td>
-                                                        <td>{{ $data_po->namaBarang}}</td>
-                                                        <td>{{ $data_po->jumlah}}</td>
+                                                        <!-- <td>{{ $data_po->namaBarang}}</td> -->
+                                                        <!-- <td>{{ $data_po->jumlah}}</td> -->
                                                         <td>{{ $data_po->created_at}}</td>
-                                                        <td>{{ $data_po->keterangan}}</td>
+                                                        <!-- <td>{{ $data_po->keterangan}}</td> -->
                                                         <td>
                                                             @if($data_po->status === 1 )
                                                             Purchase Order ditolak Warehouse
