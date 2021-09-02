@@ -75,14 +75,18 @@
                                                 <div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label mb-10">No SO</label>
-                                                            <input type="text" id="no_PO" name="no_PO" class="form-control" placeholder="">
-                                                        </div>
+															<label class="control-label mb-10">NO SO</label>
+															<select name="no_PO" id="no_PO" class="form-control">
+																@foreach($noPO as $noPO)
+																<option value="{{ $noPO->no_PO }}">{{ $noPO->no_PO }}</option>
+																@endforeach
+															</select>
+														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label mb-10">Tanggal Transaksi</label>
-                                                            <input type="date" id="no_PO" name="no_PO" class="form-control" placeholder="">
+                                                            <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control" placeholder="">
                                                         </div>
 													</div>
 												</div>
@@ -136,6 +140,7 @@
 																				<tr>
 																					<th>No Transaksi</th>
 																					<th>No PO</th>
+																					<!-- <th>Tanggal Transaksi</th> -->
 																					<th>Nama barang</th>
 																					<th>Jumlah</th>
 																					<th>Keterangan</th>
@@ -181,19 +186,21 @@
 	function ambildata() {
 		var no_PO = document.getElementById('no_PO').value;
 		var no_trans = document.getElementById('no_trans').value;
+		var tgl_transaksi = document.getElementById('tgl_transaksi').value;
 		var keterangan = document.getElementById('keterangan').value;
 		var nama_barang = document.getElementById('nama_barang').value;
 		var kode_barang = document.getElementById('kode_barang').value;
 		var jumlah = document.getElementById('jumlah').value;
 
-		addrow(no_trans, no_PO, keterangan, nama_barang, kode_barang, jumlah,);
+		addrow(no_trans, no_PO, tgl_transaksi, keterangan, nama_barang, kode_barang, jumlah,);
 	}
 	var i = 0;
 
-	function addrow(no_trans,no_PO, keterangan, nama_barang, kode_barang, jumlah) {
+	function addrow(no_trans,no_PO, tgl_transaksi, keterangan, nama_barang, kode_barang, jumlah) {
 		i++;
 		$('#TabelDinamis').append('<tr id="row' + i + '"></td><td><input type="text" style="outline:none;border:0;"  name="no_trans[]" id="no_trans" value="' + no_trans + 
 														'"></td><td><input type="text" style="outline:none;border:0;" readonly name="no_PO[]" id="no_PO" value="' + no_PO + 
+														'"></td><td style=display:none;"><input type="text" style="outline:none;border:0;" readonly name="tgl_transaksi[]" id="tgl_transaksi" value="' + tgl_transaksi + 
 														'"></td><td><input type="text" style="outline:none;border:0;" readonly name="nama_barang[]" id="nama_barang" value="' + nama_barang + 
 														'"></td><td style=display:none;"><input type="text" style="outline:none;border:0;"  name="kode_barang[]" id="kode_barang" value="' + kode_barang + 
 														'"></td><td><input type="text" style="outline:none;border:0;" readonly name="jumlah[]" id="jumlah" value="' + jumlah + 
