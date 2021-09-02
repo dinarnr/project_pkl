@@ -14,6 +14,7 @@ class TransaksiModel extends Model
 
     protected $table = "transaksi_masuk";
     protected $primaryKey = "id";
+    public $incrementing = false;
 
     protected $fillable = [
         'id', 'no_transaksi', 'tgl_transaksi', 'nama_barang', 'po', 'kondisi',  'jumlah', 'nama_supplier', 'instansi', 'pengirim', 'penerima',  'created_at', 'updated_at'

@@ -40,7 +40,7 @@ class TransaksiController extends Controller
         $supplier = SupplierModel::all();
         $barang = Master::where([['status', 'aktif']])->get();
         $transaksi_masuk = TransaksiModel::all();
-        // $no_trans = IdGenerator::generate(['table' => 'transaksi_masuk', 'length' => 9, 'prefix' => date('ymd')]);
+        // $no_trans = IdGenerator::generate(['table' => 'transaksi_masuk', 'length' => 13, 'prefix' => 'TRK'.'-'.date('ym')]);
         
         $now = Carbon::now();
         $thnBln = $now->year . $now->month;
@@ -48,7 +48,7 @@ class TransaksiController extends Controller
         // $kode = strtoupper(substr($tanggal, 0, 3));
         $check = count(TransaksiModel::where('no_transaksi', 'like', "%$thnBln%")->get()->toArray());
         $angka = sprintf("%03d", (int)$check + 1);
-        $noPO = $thnBln . "" . $angka;
+        // $noPO = $thnBln . "" . $angka;
         $no_trans =  $kode.  "-"  .$now->year . $now->month . $angka;
         // dd($tanggal);
 
@@ -239,15 +239,16 @@ class TransaksiController extends Controller
         $data_instansi = Instansi::all();
         $barang = Master::where([['status', 'aktif']])->get();
         $supplier = SupplierModel::all();
+        $noPO = PO::all();
+    
          // $no_trans = IdGenerator::generate(['table' => 'transaksi_masuk', 'length' => 8, 'prefix' => 'TRK-',date('ym')]);
         $now = Carbon::now();
         $thnBln = $now->year . $now->month;
         $kode = strtoupper(substr("TRK", 0, 3));
         $check = count(TransaksiModel::where('no_transaksi', 'like', "%$thnBln%")->get()->toArray());
         $angka = sprintf("%03d", (int)$check + 1);
-        $noPO = $thnBln . "" . $angka;
         $no_trans =  $kode.  "-"  .$now->year . $now->month . $angka;
-        return view('transaksi/addkeluarretur', compact('no_trans','data_instansi','supplier', 'barang', 'transaksi_keluar'));
+        return view('transaksi/addkeluarretur', compact('no_trans', 'noPO','data_instansi','supplier', 'barang', 'transaksi_keluar'));
     }
 
     public function addkeluarretur2(Request $request)
@@ -269,6 +270,7 @@ class TransaksiController extends Controller
             TransaksiKeluar::create(
                 [
                     'no_transaksi' => $request->no_transaksi,
+                    'tgl_transaksi'=> $request->tgl_transaksi,
                     'nama_supplier' => $request->nama_supplier,
                     'pengirim' => $request->pengirim,
                     'penerima' => $request->penerima,
