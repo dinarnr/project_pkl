@@ -18,8 +18,10 @@ class PoController extends Controller
     //
     public function index()
     {
+        $data_po_wh = PO::all()->where('status', '1');
         $data_po = PO::all();
-        return view('po\po', compact('data_po'));
+        // dd($data_po_wh);
+        return view('po\po', compact('data_po', 'data_po_wh'));
     }
 
     //
@@ -41,7 +43,9 @@ class PoController extends Controller
     public function addpo2(Request $request)
     {
         $user = Auth::user();
+        if($request->jenis_simpan == '1'){
 
+    
         // $rules = [
         //     'TabelDinamis' => 'required'
         // ];
@@ -51,6 +55,43 @@ class PoController extends Controller
         // ];
         // $this->validate($request, $rules, $messages);
 
+        $jumlah_data = count($request->noPO);
+        for ($i = 0; $i < $jumlah_data; $i++) {
+            DetailPO::create(
+                [
+                    'no_PO' => $request->noPO[$i],
+                    'nama_barang' => $request->nama_barang[$i],
+                    'jumlah' => $request->jumlah[$i],
+                    'rate' => $request->rate[$i],
+                    'amount' => $request->amount[$i],
+                    'keterangan_barang' => $request->keterangan[$i],
+                ]
+            );
+        }
+
+        PO::create(
+            [
+                'no_PO' => $request->no_PO,
+                'instansi' => $request->instansi,
+                'tgl_pemasangan' => $request->tgl_transaksi,
+                'pic_marketing' => $user->name,
+                'status' => '1'
+            ]
+        );
+
+        $user = Auth::user();
+        Log::create(
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Create PO',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+    } elseif($request->jenis_simpan == '2'){
         $jumlah_data = count($request->noPO);
         for ($i = 0; $i < $jumlah_data; $i++) {
             DetailPO::create(
@@ -86,6 +127,8 @@ class PoController extends Controller
 
             ]
         );
+    }
+
         return redirect('/po');
     }
     public function editpo(Request $request)
@@ -215,7 +258,8 @@ class PoController extends Controller
         $data_detail = DetailPO::where('no_PO', $no_PO)->get();
         $data_po = PO::where('no_PO', $no_PO)->get();
         // dd($data_detail);
-        return view('po/detail', compact('data_po', 'data_detail'));
+        $user = Auth::user();
+        return view('po/detail', compact('data_po', 'data_detail', 'user'));
     }
 
     // public function insertCB(Request $request)
