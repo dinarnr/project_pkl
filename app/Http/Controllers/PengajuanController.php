@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailPengajuan;
 use App\Models\Log;
+use App\Models\Master;
 use App\Models\Pembelian;
 use App\Models\Pengajuan;
+use App\Models\PO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Input\Input;
@@ -138,7 +140,9 @@ class PengajuanController extends Controller
 
     public function addretur()
     {
-        return view('pengajuan/addbrgretur');
+        $noPO = PO::all();
+        $barang = Master::all();
+        return view('pengajuan/addbrgretur', compact('noPO','barang'));
     }
 
     public function addretur2(Request $request)
@@ -160,7 +164,7 @@ class PengajuanController extends Controller
             [
                 'kode' => $request->kode_pengajuan,
                 'judul' => $request->nama_pengajuan,
-                'jenisBarang' => 'Baru',
+                'jenisBarang' => 'Retur',
                 'pic_teknisi' => $user->name
             ]
         );
@@ -171,6 +175,7 @@ class PengajuanController extends Controller
                     'kode' => $request->kode_pengajuan,
                     'namaBarang' => $request->nama_barang[$i],
                     'jmlBarang' => $request->jumlah[$i],
+                    'noPO' => $request->no_PO[$i],
                     'keterangan' => $request->keterangan[$i],
                     'jenisBarang' => 'Retur'
                 ]

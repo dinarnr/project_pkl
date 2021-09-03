@@ -2,7 +2,7 @@
 @section('title', 'Data Barang Rekomendasi')
 @section('content')
 
-@if (auth()->user()->divisi == "teknisi")
+@if (auth()->user()->divisi == "teknisi" )
 
 <!-- Main Content -->
 <div class="page-wrapper">
@@ -41,7 +41,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nama Barang</th>
+                                                    <th>Nama Pengajuan</th>
+                                                    <th>Jumlah</th>
                                                     <th>Keterangan</th>
                                                     <th>Tanggal pengajuan</th>
                                                     <th>Aksi</th>

@@ -46,19 +46,27 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label mb-10 text-left" for="example-email">No PO<span class="help"> </span></label>
-                                                <input type="text" id="kode_pengajuan" readonly="readonly" value="" name="kode_pengajuan" class="form-control" placeholder="">
+											<div class="form-group">
+												<label class="control-label mb-10">No PO</label>
+                                                <select name="no_PO" id="no_PO" class="form-control select2">
+													@foreach($noPO as $noPO)
+													<option value="{{ $noPO->no_PO }}">{{ $noPO->no_PO }}</option>
+													@endforeach
+												</select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label mb-10">Nama barang</label>
-                                                <input type="text" class="form-control" name="nama_barang" id="nama_barang">
-                                            </div>
-                                        </div>
+											<div class="form-group">
+												<label class="control-label mb-10">Nama Barang</label>
+												<select name="nama_barang" id="nama_barang" class="form-control">
+													@foreach($barang as $brg)
+														<option value="{{ $brg->nama_barang }}">{{ $brg->nama_barang }} | {{ $brg->kode_barang }} </option>
+													@endforeach
+												</select>
+											</div>
+										</div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label mb-10">Jumlah</label>
@@ -92,6 +100,7 @@
                                                                 <table class="table table-bordered align-items-center">
                                                                     <thead class="thead-light">
                                                                         <tr>
+                                                                            <th>Nama Pengajuan</th>
                                                                             <th>Nama barang</th>
                                                                             <th>Jumlah</th>
                                                                             <th>Keterangan</th>
@@ -134,16 +143,21 @@
     @section('scripts')
     <script type="text/javascript">
         function ambildata() {
+            var nama_pengajuan = document.getElementById('nama_pengajuan').value;
             var nama_barang = document.getElementById('nama_barang').value;
             var jumlah = document.getElementById('jumlah').value;
             var keterangan = document.getElementById('keterangan').value;
-            addrow(nama_pengajuan, kode_pengajuan, nama_barang, jumlah, keterangan);
+            addrow(nama_pengajuan, nama_barang, jumlah, keterangan);
         }
         var i = 0;
 
-        function addrow(nama_pengajuan, kode_pengajuan, nama_barang, jumlah, keterangan) {
+        function addrow(nama_pengajuan, nama_barang, jumlah, keterangan) {
             i++;
-            $('#TabelDinamis').append('<tr id="row' + i + '"><td><input type="text" style="outline:none;border:0;" readonly name="nama_barang[]" id="nama_barang" value="' + nama_barang + '"></td><td><input type="text" style="outline:none;border:0;" name="jumlah[]" id="jumlah" value="' + jumlah + '"></td><td><input type="text" style="outline:none;border:0;" name="keterangan[]" id="keterangan" value="' + keterangan + '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
+            $('#TabelDinamis').append('<tr id="row' + i + '"><td><input type="text" style="outline:none;border:0;" readonly name="nama_pengajuan[]" id="nama_pengajuan" value="' + nama_pengajuan + 
+            '"></td><td><input type="text" style="outline:none;border:0;" readonly name="nama_barang[]" id="nama_barang" value="' + nama_barang + 
+            '"></td><td><input type="text" style="outline:none;border:0;" name="jumlah[]" id="jumlah" value="' + jumlah + 
+            '"></td><td><input type="text" style="outline:none;border:0;" name="keterangan[]" id="keterangan" value="' + keterangan + 
+            '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
         };
         $(document).on('click', '.remove_row', function() {
             var row_id = $(this).attr("id");
