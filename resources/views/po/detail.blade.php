@@ -262,7 +262,7 @@
                                             </div>
                                         </tr>
                                     </table>
-
+                                    
                                 </div>
                             </div>
                             <div class="col-xs-4">
@@ -271,6 +271,7 @@
                                         <div class="text-left">
                                             <h6 class="txt-dark"><strong>PENAWARAN</strong></h6>
                                         </div>
+                                        <form action="{{ url('confirm/{id_PO}') }}" method="POST" enctype="multipart/form-data">
                                         @foreach ($data_po as $data_po)
                                         <tr>
                                             <div class="">
@@ -303,7 +304,6 @@
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
-                                <form action="{{ url('confirm/{id_PO}') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @foreach ($data_detail as $detail)
                                     <tr>
@@ -325,7 +325,7 @@
                                     @endforeach
                                     <!-- <tr class="txt-dark">
                                         <td colspan="3"></td>
-
+                                        
                                         <td>Total</td>
                                         <td>#</td>
                                     </tr> -->
@@ -346,8 +346,12 @@
                         <td>#</td>
                     </tr> -->
                     </tbody>
-                    </table>
-                    <!-- </form> -->
+                </table>
+                <!-- </form> -->
+                <!-- @foreach ($data_po as $data_po)
+                <div class="col-md-4">
+                </div> -->
+                <!-- @endforeach -->
                 </div>
             </div>
             <div class="row">
