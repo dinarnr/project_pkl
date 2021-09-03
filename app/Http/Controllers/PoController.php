@@ -166,16 +166,17 @@ class PoController extends Controller
     }
     public function confirm(Request $request)
     {
+        // dd($request->non);
             $user = Auth::user();
             DetailPO::whereIn('id_po', $request->is_active)
             ->update(array(
                     'status'=> '2'
             ));  
 
-            DetailPO::whereIn('id_po', $request->non)
-            ->update(array(
-                    'status'=> '1'
-            ));  
+            // DetailPO::whereIn('id_po', $request->non)
+            // ->update(array(
+            //         'status'=> '1'
+            // ));  
 
             PO::where('no_PO', $request->no_PO)
             ->update(

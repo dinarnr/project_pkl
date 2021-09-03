@@ -271,13 +271,15 @@
                                         <div class="text-left">
                                             <h6 class="txt-dark"><strong>PENAWARAN</strong></h6>
                                         </div>
+                                        @foreach ($data_po as $data_po)
                                         <tr>
                                             <div class="">
-                                                <td class="txt-dark"> Number : <br>
-                                                    Date : <br>
+                                                <td class="txt-dark"> Number : <input type="text" id="no_PO" name="no_PO" value="{{$data_po->no_PO}}" style="outline:none;border:0;" readonly> <br>
+                                                    Date : {{$data_po->created_at}} <br>
                                                     Note : </td>
                                             </div>
                                         </tr>
+                                        @endforeach
                                     </table>
 
 
@@ -317,7 +319,7 @@
                                         </td>
                                         <td>
                                             <input type="checkbox" id="is_active[]" name="is_active[]" value="{{$detail->id_po}}" />
-                                            <input type="hidden" name="non[]" value="{{$detail->id_po}}">
+                                            <input type="hidden" id="non[]" name="non[]" value="{{$detail->id_po}}">
                                         </td>
                                     </tr>
                                     @endforeach

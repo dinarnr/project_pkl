@@ -210,6 +210,19 @@
                                                         <td>{{ $data_po->tgl_pemasangan}}</td>
                                                         <td>
                                                             @if($data_po->status === 1 )
+                                                            Purchase Order diproses Warehouse
+                                                            @elseif ($data_po->status === 2 )
+                                                            Purchase Order disetujui Warehouse
+                                                            @elseif ($data_po->status === 3 )
+                                                            Purchase Order ditolak Admin
+                                                            @elseif ($data_po->status === 4 )
+                                                            Purchase Order disetujui Warehouse dan dalam proses pembelian
+                                                            @elseif ($data_po->status === 5 )
+                                                            Barang sudah dibeli
+                                                            @else
+                                                            Draft
+                                                            @endif
+                                                            <!-- @if($data_po->status === 1 )
                                                             Purchase Order ditolak Warehouse
                                                             @elseif ($data_po->status === 2 )
                                                             Purchase Order disetujui Warehouse
@@ -221,7 +234,7 @@
                                                             Barang sudah dibeli
                                                             @else
                                                             Purchase Order diproses Marketing
-                                                            @endif
+                                                            @endif -->
                                                         </td>
                                                         <td>{{ $data_po->created_at}}</td>
                                                         <td>

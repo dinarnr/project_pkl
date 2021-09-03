@@ -154,69 +154,70 @@
 
                             </div>
                             <div class="form-group">
+                                <label for="total" class="col-sm-4 control-label">Total</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="total" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ppn" class="col-sm-4 control-label">PPn 10%</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" id="ppn" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pph" class="col-sm-4 control-label">PPh 2.5%</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="pph" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="balance" class="col-sm-4 control-label">Balance Due</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="balance" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label mb-10 text-left">Jenis Penyimpanan</label>
                                 <select name="jenis_simpan" id="jenis_simpan" class="form-control">
                                     <option value="1">Proses</option>
                                     <option value="2">Draft</option>
                                 </select>
                             </div>
+
                             <div class="col-md-12" style="text-align:right;">
-                                <!-- <button type="submit" class="btn btn-default mr-10">Draft</button> -->
                                 <button type="submit" class="btn btn-primary ">Simpan</button>
                             </div>
                             <!-- <div class="col-sm-4 col-xs-4">
                                 <div class="form-wrap">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label for="total" class="col-sm-4 control-label">Total</label>
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="total" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="ppn" class="col-sm-4 control-label">PPn 10%</label>
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <input type="email" class="form-control" id="ppn" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pph" class="col-sm-4 control-label">PPh 2.5%</label>
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="pph" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="balance" class="col-sm-4 control-label">Balance Due</label>
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="balance" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                    </form>
-                                </div>
-                            </div>
-                            </form>
-                            @include('po.tambahinstansi')
+                                    <form class="form-horizontal"> -->
+
+                            <!-- </form> -->
                         </div>
                     </div>
+                    </form>
+                    @include('po.tambahinstansi')
                 </div>
             </div>
         </div>
     </div>
-    <div class="">
+</div>
+</div>
+<div class="">
 
-        <!-- Basic Table -->
+    <!-- Basic Table -->
 
-    </div>
-    <!-- /Row -->
-    <!-- /Main Content -->
+</div>
+<!-- /Row -->
+<!-- /Main Content -->
 </div>
 <!-- /#wrapper -->
 <script>
