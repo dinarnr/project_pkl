@@ -11,6 +11,7 @@ class TransaksiKeluar extends Model
     use HasFactory;
     protected $table = "transaksi_keluar";
     protected $primaryKey = "id_transaksi";
+    // public $incrementing = false;
 
     protected $fillable = [
         'id_transaksi', 'no_transaksi', 'no_PO','tgl_transaksi','jns_transaksi', 'instansi',  'ekspedisi',  

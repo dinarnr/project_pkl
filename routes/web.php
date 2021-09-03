@@ -8,8 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\PoController;
-
-
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +92,7 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('/addkeluarbaru2', 'App\Http\Controllers\TransaksiController@addkeluarbaru2')->name('addkeluarbaru2');
     Route::get('/addkeluarretur', 'App\Http\Controllers\TransaksiController@addkeluarretur');
     Route::post('/addkeluarretur2', 'App\Http\Controllers\TransaksiController@addkeluarretur2')->name('addkeluarretur2');
+    Route::get('transaki/detailmasuk/{no_transaksi}', 'App\Http\Controllers\TransasksiController@detailmasuk');
 
 
     // SUPPLIER

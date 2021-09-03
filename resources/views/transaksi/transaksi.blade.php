@@ -72,7 +72,7 @@
                                                 <td>{{ $transaksi_masuk->pengirim }}</td>
                                                 <td>{{ $transaksi_masuk->penerima }}</td>
                                                 <td>
-                                                    <a href="#"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-eye"></i></button></a>
+                                                    <a href="transaksi/detailmasuk/{{ $transaksi_masuk->no_transaksi }}"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-eye"></i></button></a>
                                                     <a href="#"><button class="btn btn-success btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
                                                     <!-- <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="hapus" action="#"><i class="fa fa-trash"></i></button> -->
 
@@ -113,10 +113,9 @@
                                                 <td>{{ $transaksi_retur->penerima }}</td>
                                                 <td>{{ $transaksi_retur->created_at }}</td>
                                                 <td>
-                                                    <a href="#"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-eye"></i></button></a>
+                                                    <a href=""><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-eye"></i></button></a>
                                                     <a href="#"><button class="btn btn-success btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
-                                                    <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="hapus" action="#"><i class="fa fa-trash"></i></button>
-
+                                                    <!-- <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="hapus" action="#"><i class="fa fa-trash"></i></button> -->
                                                 </td>
                                             </tr>
                                             @include('transaksi.hapusbrngmasuk')
