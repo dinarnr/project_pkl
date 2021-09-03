@@ -99,9 +99,9 @@
                                                         @foreach ($data_po as $detailpo)
                                                         <tr>
                                                             <div class="">
-                                                                <td class="txt-dark"> Number : {{$detailpo->no_PO}} <br>
-                                                                    Date : {{$detailpo->created_at}}<br>
-                                                                    Note : </td>
+                                                            <td class="txt-dark"> Number : <input type="text" id="no_PO" name="no_PO" value="{{$data_po->no_PO}}" style="outline:none;border:0;" readonly> <br>
+                                                            Date : {{$data_po->created_at}} <br>
+                                                            Note : </td>
                                                             </div>
                                                         </tr>
                                                         @endforeach
