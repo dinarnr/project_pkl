@@ -316,10 +316,8 @@
                                             <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Jumlah">{{$detail->jumlah}}</a>
                                         </td>
                                         <td>
-                                            <div class="checkbox checkbox-success}">
-                                                <input type="checkbox" id="is_active" name="status{{$no-1}}" value="2" />
-                                                <label for=" is_active"></label>
-                                            </div>
+                                            <input type="checkbox" id="is_active[]" name="is_active[]" value="{{$detail->id_po}}" />
+                                            <input type="hidden" name="non[]" value="{{$detail->id_po}}">
                                         </td>
                                     </tr>
                                     @endforeach
