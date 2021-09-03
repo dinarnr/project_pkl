@@ -177,7 +177,7 @@ class PoController extends Controller
                     'status'=> '1'
             ));  
 
-            PO::where('no_PO', $request->noPO)
+            PO::where('no_PO', $request->no_PO)
             ->update(
                 [
                 'status'=> '2'
