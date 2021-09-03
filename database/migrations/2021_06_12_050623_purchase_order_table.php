@@ -14,11 +14,15 @@ class PurchaseOrderTable extends Migration
     public function up()
     {
         Schema::create('purchase_order', function (Blueprint $table) {
-            $table->integer('id',15)->autoIncrement()->nullable();
+            $table->increments('id_PO',10);
             $table->string('no_PO')->nullable();
             $table->string('instansi',50);
             $table->date('tgl_pemasangan');
             $table->integer('status')->nullable();
+            $table->string('total')->nullable();
+            $table->string('ppn')->nullable();
+            $table->string('pph')->nullable();
+            $table->string('balance')->nullable();
             $table->string('pic_marketing',50)->nullable();
             $table->string('pic_warehouse',50)->nullable();
             $table->string('pic_admin',50)->nullable();

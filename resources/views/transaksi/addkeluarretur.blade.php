@@ -9,7 +9,7 @@
 		<!-- Title -->
 		<div class="row heading-bg">
 			<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-				<h5 class="txt-dark">barang keluar baru</h5><br>
+				<h5 class="txt-dark">barang keluar retur</h5><br>
 				<a href="/addkeluarbaru" class="btn btn-primary btn-icon-anim"><i class="fa fa succes"></i> BARU</a>
 				<a href="/addkeluarretur" class="btn btn-primary btn-icon-anim"><i class="fa fa succes"></i> RETUR</a>
 
@@ -18,7 +18,7 @@
 			<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 				<ol class="breadcrumb">
 					<li><a href="#"><span>transaksi</span></a></li>
-					<li class="active"><span> barang keluar baru </span></li>
+					<li class="active"><span> barang keluar retur </span></li>
 				</ol>
 			</div>
 			<!-- /Breadcrumb -->
@@ -34,22 +34,8 @@
                                     <div class="form-wrap">
                                         <form action="{{ url('addkeluarbaru2') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <div class="form-body" >
-												<div class="row" >
-													<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label mb-10">Jenis Barang</label>
-																<select id="jenistransaksi" name="jenistransaksi" onchange=";" class="form-control">
-																	<option value='' disabled selected style='display:none;'>Pilih Jenis Transaksi</option>
-																	<option value="NO">Barang Instalasi</option>
-																	<option value="YES">Barang Garansi</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="" id="box-1" style="display:none">	
-												<div class="row" id=""> 
+                                            <div class="form-body">
+                                                <div class="row">
 													@foreach ((array)$no_trans as $no_trans)
 													<div class="col-md-6">
 														<div class="form-group">
@@ -59,18 +45,24 @@
 														</div>
 													</div>
 													@endforeach
-													<div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label mb-10">Instansi</label>
-                                                            <select name="instansi" id="instansi" class="form-control">
-                                                            	@foreach($data_instansi as $instansi)
-																<option value="{{ $instansi->nama_instansi }}">{{ $instansi->nama_instansi }} | {{ $instansi->kode_instansi }}</option>
+                                                    <div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label mb-10">Supplier</label>
+															<select name="nama_supplier" id="nama_supplier" class="form-control">
+																@foreach($supplier as $sup)
+																<option value="{{ $sup->nama_supplier }}">{{ $sup->nama_supplier }} | {{ $sup->kode_supplier }} </option>
 																@endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
+															</select>
+														</div>
+													</div>
                                                 </div>
                                                 <div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label mb-10">Pengirim Ekspedisi</label>
+															<input type="text" id="pengirim" name="pengirim" class="form-control">
+														</div>
+													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label mb-10">Penerima</label>
@@ -78,59 +70,59 @@
 
 														</div>
 													</div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label mb-10">Pengirim Ekspedisi</label>
-															<input type="text" id="pengirim" name="pengirim" class="form-control">
+															<label class="control-label mb-10">NO SO</label>
+															<select name="no_PO" id="no_PO" class="form-control">
+																@foreach($noPO as $noPO)
+																<option value="{{ $noPO->no_PO }}">{{ $noPO->no_PO }}</option>
+																@endforeach
+															</select>
 														</div>
 													</div>
-                                                </div>
-												
-												<hr>
-											</div>
-												<div id="box-2" style="display:none">
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label mb-10">No SO</label>
-																<!-- <input type="text" id="no_PO" name="no_PO" class="form-control" placeholder=""> -->
-																<select name="" id="" class="form-control" >
-																	<option value=""></option>
-																</select>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label mb-10">Nama Barang</label>
-																<select name="nama_barang" id="nama_barang" class="form-control">
-																	@foreach($barang as $brg)
-																		<option value="{{ $brg->nama_barang }}">{{ $brg->nama_barang }} | {{ $brg->kode_barang }} </option>
-																	@endforeach
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label mb-10">Jumlah</label>
-																<input type="number" id="jumlah" name="jumlah" class="form-control">
-																<input  id="kode_barang" name="kode_barang" value="" hidden>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label mb-10">Keterangan</label>
-																<input type="text" id="keterangan" name="keterangan" class="form-control">
-															</div>
-														</div>
-													</div>
-													<div class="col-md-14" style="text-align:right;">
-														<button type="button" onclick="ambildata()" class="btn btn-success ">Tambah Data</button>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label mb-10">Tanggal Transaksi</label>
+                                                            <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control" placeholder="">
+                                                        </div>
 													</div>
 												</div>
+												<div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label mb-10">Nama Barang</label>
+                                                            <select name="nama_barang" id="nama_barang" class="form-control">
+																@foreach($barang as $brg)
+																	<option value="{{ $brg->nama_barang }}">{{ $brg->nama_barang }} | {{ $brg->kode_barang }} </option>
+																@endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+													<div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label mb-10">Jumlah</label>
+                                                            <input type="number" id="jumlah" name="jumlah" class="form-control">
+                                                            
+                                                            <input  id="kode_barang" name="kode_barang" value="" hidden>
+                                                            
+                                                        </div>
+                                                    </div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label mb-10">Keterangan</label>
+                                                            <input type="text" id="keterangan" name="keterangan" class="form-control">
+                                                        </div>
+                                                    </div>
+												</div>
                                             </div>
-                                            
+                                            <div class="col-md-14" style="text-align:right;">
+												<button type="button" onclick="ambildata()" class="btn btn-success ">Tambah Data</button>
+											</div>
                                             <div class="col-md-12 mt-10">
 												<div class="panel panel-default card-view">
 													<div class="panel-heading">
@@ -148,6 +140,7 @@
 																				<tr>
 																					<th>No Transaksi</th>
 																					<th>No PO</th>
+																					<!-- <th>Tanggal Transaksi</th> -->
 																					<th>Nama barang</th>
 																					<th>Jumlah</th>
 																					<th>Keterangan</th>
@@ -176,11 +169,6 @@
 													</div>
 												</div>
 											</div>
-
-											<!-- BARANG GARANSI -->
-											<div class="row" id="">
-
-											</div>
                                         </form>
                                     </div>
                                 </div>
@@ -198,19 +186,21 @@
 	function ambildata() {
 		var no_PO = document.getElementById('no_PO').value;
 		var no_trans = document.getElementById('no_trans').value;
+		var tgl_transaksi = document.getElementById('tgl_transaksi').value;
 		var keterangan = document.getElementById('keterangan').value;
 		var nama_barang = document.getElementById('nama_barang').value;
 		var kode_barang = document.getElementById('kode_barang').value;
 		var jumlah = document.getElementById('jumlah').value;
 
-		addrow(no_trans, no_PO, keterangan, nama_barang, kode_barang, jumlah,);
+		addrow(no_trans, no_PO, tgl_transaksi, keterangan, nama_barang, kode_barang, jumlah,);
 	}
 	var i = 0;
 
-	function addrow(no_trans,no_PO, keterangan, nama_barang, kode_barang, jumlah) {
+	function addrow(no_trans,no_PO, tgl_transaksi, keterangan, nama_barang, kode_barang, jumlah) {
 		i++;
 		$('#TabelDinamis').append('<tr id="row' + i + '"></td><td><input type="text" style="outline:none;border:0;"  name="no_trans[]" id="no_trans" value="' + no_trans + 
 														'"></td><td><input type="text" style="outline:none;border:0;" readonly name="no_PO[]" id="no_PO" value="' + no_PO + 
+														'"></td><td style=display:none;"><input type="text" style="outline:none;border:0;" readonly name="tgl_transaksi[]" id="tgl_transaksi" value="' + tgl_transaksi + 
 														'"></td><td><input type="text" style="outline:none;border:0;" readonly name="nama_barang[]" id="nama_barang" value="' + nama_barang + 
 														'"></td><td style=display:none;"><input type="text" style="outline:none;border:0;"  name="kode_barang[]" id="kode_barang" value="' + kode_barang + 
 														'"></td><td><input type="text" style="outline:none;border:0;" readonly name="jumlah[]" id="jumlah" value="' + jumlah + 
@@ -224,25 +214,5 @@
 
 		$('#nama_barang').select2();
 		$('#nama_supplier').select2();
-</script>
-<script>
-	var select = document.getElementById('jenistransaksi');
-	var currentOption = 0;
-
-// Add event listener that listens on when you click "select"
-	select.addEventListener("click", function() {
-    // If one of the other options are selected, then hide it and set it to empty
-    // Set current option to be current option
-    currentOption = this.selectedIndex;
-    // Set box-N to show
-    if(currentOption == 1 ){
-    	document.getElementById('box-1').style.display = 'block';
-      document.getElementById('box-2').style.display = 'block';
-    } else if(currentOption == 2){
-    	document.getElementById('box-1').style.display = 'none';
-		document.getElementById('box-2').style.display = 'block';
-    }
-});
-
 </script>
 @endsection
