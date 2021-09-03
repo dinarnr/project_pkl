@@ -93,7 +93,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label mb-10">No SO</label>
-																<select name="no_PO" id="no_PO" class="form-control" onChange="changecat(this.value);">
+																<select name="no_PO" id="no_PO" class="form-control input-lg dynamic" data-dependent="no_PO" onChange="changecat(this.value);">
 																	@foreach($noPO as $noPO)
 																	<option value="{{ $noPO->no_PO }}">{{ $noPO->no_PO }}</option>
 																	@endforeach
@@ -103,7 +103,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label mb-10">Nama Barang</label>
-																<select name="nama_barang" id="nama_barang" class="form-control">
+																<select name="nama_barang" id="nama_barang" class="form-control input-lg dynamic" data-dependent="nama_barang">
 																	@foreach($namabrg as $brg)
 																		<option value="{{ $brg->nama_barang }}">{{ $brg->nama_barang }} </option>
 																	@endforeach
@@ -248,15 +248,27 @@
 </script>
 
 <script>
-	function changecat(value) {
-        if (value.length == 0) document.getElementById("nama_barang").innerHTML = "<option></option>";
-        else {
-            var catOptions = "";
-            for (categoryId in mealsByCategory[value]) {
-                catOptions += "<option>" + mealsByCategory[value][categoryId] + "</option>";
-            }
-            document.getElementById("nama_barang").innerHTML = catOptions;
-        }
-    }
+	$(document).ready(function(){
+
+		$('.dynamic').change(function(){
+			if($(this).val() != '')
+			{
+				var select = $(this).attr("id");
+				var value = $(this).val();
+				var dependent = $(this).data('dependent');
+				var dependent = $(this).data('dependent');
+				var _token = $('input[name="_token"]').val('');
+				$.ajax({
+					url:"{{ route(dynamicdepent.fetch')}}",
+					method: "POST",
+					data : {select:select, value:value, _token:_token, dependent:dependent},
+					success:function(result){
+						$('#'+dependent).html(result);
+					}
+				})
+			}
+		});
+
+	});
 </script>
 @endsection

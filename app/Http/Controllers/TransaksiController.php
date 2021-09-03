@@ -12,12 +12,15 @@ use App\Models\TransaksiKeluar;
 use App\Models\PO;
 use App\Models\Instansi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Models\TransaksiModel;
 use Carbon\Carbon;
+use GrahamCampbell\ResultType\Result;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use PhpOption\Option;
 
 class TransaksiController extends Controller
 {
@@ -178,6 +181,7 @@ class TransaksiController extends Controller
         $transaksi_keluar = TransaksiKeluar::all();
         $data_instansi = Instansi::all();
         $barang = Master::where([['status', 'aktif']])->get();
+        // $namabrg = DB::table('DetailPO')->groupby('nama_barang')->get();
         $namabrg = DetailPO::all();
         // dd($namabrg);
         $noPO = PO::all();
@@ -229,6 +233,24 @@ class TransaksiController extends Controller
 
         return redirect('/transaksikeluar');
     }
+
+    public function fetch(Request $request)
+    {
+        $select = $request->get('select');
+        $value = $request->get('value');
+        $dependent = $request->get('dependent');
+        $data = DB::table('DetailPO')->where($select, $value)
+                                    ->groupBy($dependent) ->get();
+        $output = '<option value="">Select '.ucfirst(
+            $dependent).'</option>';
+        foreach($data as $row){
+        $output .= '<option value="'. $row->$dependent.'"> '.$row->
+                $dependent.'</option>';
+        }
+        echo  $output;  
+    }
+
+    // -----------------------KELUAR RETURR----------------------------
 
     public function addkeluarretur()
     {
