@@ -122,8 +122,8 @@
                                                     <th>Deskripsi</th>
                                                     <th>Keterangan</th>
                                                     <th>Qty</th>
-                                                    <th>Rate</th>
-                                                    <th>Amount</th>
+                                                    <th>Rate (Rp)</th>
+                                                    <th>Amount (Rp)</th>
                                                     <!-- <th colspan="3">Aksi</th> -->
                                                 </tr>
                                             </thead>
@@ -133,18 +133,18 @@
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>
-                                                        <a href="#" id="username" style="font-weight:bold" data-type="text" data-pk="1" data-title="Nama barang">{{$detail->nama_barang}}</a><br>&nbsp;&nbsp;- {{$detail->keterangan_barang}}</br>
+                                                        <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Nama barang">{{$detail->nama_barang}}</a><br>&nbsp;&nbsp;- {{$detail->keterangan_barang}}</br>
                                                     </td>
                                                     <td>
-                                                        <a href="#" id="username2" style="font-weight:bold" data-type="text" data-pk="1" data-title="keterangan">{{$detail->keterangan}}</a>
+                                                        <a href="#" id="username2" style="font-weight:bold" data-type="text" data-pk="1" data-title="Keterangan">{{$detail->keterangan}}</a>
                                                     </td>
                                                     <td>
-                                                        <a href="#" id="username3" style="font-weight:bold" data-type="text" data-pk="1" data-title="Jumlah">{{$detail->jumlah}}</a>
+                                                        <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Jumlah">{{$detail->jumlah}}</a>
                                                     </td>
                                                     <td>
-                                                        <a href="#" id="username4" style="font-weight:bold" data-type="text" data-pk="1" data-title="Rate">Rp {{number_format ($detail->rate, 0, ',', '.')}}</a>
+                                                        <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Rate">{{$detail->rate}}</a>
                                                     </td>
-                                                    <td><input type="text" style="outline:none;border:0;" readonly name="amount[]" id="amount" value=""></td>
+                                                    <td> <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Amount">{{$detail->amount}}</a></td>
                                                 </tr>
                                                 @endforeach
                                                 <tr class="txt-dark">
@@ -181,12 +181,14 @@
                                                     <div class="text-center">
                                                         <h6 class="txt-dark">Malang,26 Agustus 2021</h6>
                                                     </div><br><br><br><br><br>
+
                                                     <div class="text-center">
-                                                        <h6 class="txt-dark">YUDHA PRAYOGO A.</h6>
+                                                        <h6 class="txt-dark">{{ Auth::user()->name }}</h6>
                                                     </div>
-                                                    <hr ">
+
+                                                    <hr>
                                             <div class=" text-center mt-2">
-                                                    <h6 class="txt-dark">IT Marketing</h6>
+                                                    <h6 class="txt-dark">{{ Auth::user()->divisi }}</h6>
                                             </div>
 
                                             </table>
@@ -256,7 +258,7 @@
                                         </div>
                                         <tr>
                                             <div class="">
-                                                <td class="txt-dark">  </td>
+                                                <td class="txt-dark"> </td>
                                             </div>
                                         </tr>
                                     </table>
@@ -269,13 +271,15 @@
                                         <div class="text-left">
                                             <h6 class="txt-dark"><strong>PENAWARAN</strong></h6>
                                         </div>
+                                        @foreach ($data_po as $data_po)
                                         <tr>
                                             <div class="">
-                                                <td class="txt-dark"> Number :  <br>
-                                                    Date :  <br>
+                                                <td class="txt-dark"> Number : <input type="text" id="no_PO" name="no_PO" value="{{$data_po->no_PO}}" style="outline:none;border:0;" readonly> <br>
+                                                    Date : {{$data_po->created_at}} <br>
                                                     Note : </td>
                                             </div>
                                         </tr>
+                                        @endforeach
                                     </table>
 
 
@@ -308,16 +312,14 @@
                                             <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Nama barang">{{$detail->nama_barang}}</a><br>&nbsp;&nbsp;- {{$detail->keterangan_barang}}</br>
                                         </td>
                                         <td>
-                                            <a href="#" id="username2" style="font-weight:bold" data-type="text" data-pk="1" data-title="KEterangan">{{$detail->keterangan}}</a>
+                                            <a href="#" id="username2" style="font-weight:bold" data-type="text" data-pk="1" data-title="Keterangan">{{$detail->keterangan}}</a>
                                         </td>
                                         <td>
                                             <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Jumlah">{{$detail->jumlah}}</a>
                                         </td>
                                         <td>
-                                            <div class="checkbox checkbox-success}">
-                                                <input type="checkbox" id="is_active" name="status{{$no-1}}" value="2" />
-                                                <label for=" is_active"></label>
-                                            </div>
+                                            <input type="checkbox" id="is_active[]" name="is_active[]" value="{{$detail->id_po}}" />
+                                            <input type="hidden" id="non[]" name="non[]" value="{{$detail->id_po}}">
                                         </td>
                                     </tr>
                                     @endforeach
@@ -352,7 +354,7 @@
                 <div class="col-xs-8">
 
                 </div>
-                <div class="col-xs-4">
+                <!-- <div class="col-xs-4">
                     <div class="form-group">
                         <table>
                             <div class="text-center">
@@ -368,17 +370,17 @@
 
                     </table>
                 </div>
+            </div> -->
             </div>
         </div>
     </div>
-</div>
-<!-- /Row -->
-<!-- Row -->
+    <!-- /Row -->
+    <!-- Row -->
 
 </div>
 @endif
 
-<div class="pull-right">
+<div class="pull-right hide-from-printer">
     @if (auth()->user()->divisi == "warehouse")
     <button type="submit" class="btn btn-primary mr-10">
         Proses

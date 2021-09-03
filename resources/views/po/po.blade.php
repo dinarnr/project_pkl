@@ -70,17 +70,17 @@
                                                     <td>{{ $data_po->tgl_pemasangan}}</td>
                                                     <td>
                                                         @if($data_po->status === 1 )
-                                                        Purchase Order ditolak Warehouse
+                                                        Purchase Order diproses Warehouse
                                                         @elseif ($data_po->status === 2 )
                                                         Purchase Order disetujui Warehouse
                                                         @elseif ($data_po->status === 3 )
                                                         Purchase Order ditolak Admin
                                                         @elseif ($data_po->status === 4 )
-                                                        Purchase Order disetujui Admin dan dalam proses pembelian
+                                                        Purchase Order disetujui Warehouse dan dalam proses pembelian
                                                         @elseif ($data_po->status === 5 )
                                                         Barang sudah dibeli
                                                         @else
-                                                        Purchase Order diproses Marketing
+                                                        Draft
                                                         @endif
                                                     </td>
                                                     <td>{{ $data_po->created_at->format('d-m-y H:i:s')}}</td>
@@ -132,9 +132,9 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default card-view">
                         <div class="panel-heading">
-                            <div class="pull-left">
+                            <!-- <div class="pull-left">
                                 <a href="addpo"> <button class="btn btn-success btn-icon-anim"> Tambah Data</button> </a>
-                            </div>
+                            </div> -->
 
                             <div class="clearfix"></div>
 
@@ -166,7 +166,7 @@
                                         </tfoot> -->
                                                 <tbody>
                                                     <?php $no = 1; ?>
-                                                    @foreach ($data_po as $data_po)
+                                                    @foreach ($data_po_wh as $data_po)
                                                     <tr>
                                                         @if (auth()->user()->divisi == "admin")
                                                         @if($data_po->status >=2 )
@@ -176,17 +176,17 @@
                                                         <td>{{ $data_po->tgl_pemasangan}}</td>
                                                         <td>
                                                             @if($data_po->status === 1 )
-                                                            Purchase Order ditolak Warehouse
+                                                            Purchase Order diproses Warehouse
                                                             @elseif ($data_po->status === 2 )
                                                             Purchase Order disetujui Warehouse
                                                             @elseif ($data_po->status === 3 )
                                                             Purchase Order ditolak Admin
                                                             @elseif ($data_po->status === 4 )
-                                                            Purchase Order disetujui Admin dan dalam proses pembelian
+                                                            Purchase Order disetujui Warehouse dan dalam proses pembelian
                                                             @elseif ($data_po->status === 5 )
                                                             Barang sudah dibeli
                                                             @else
-                                                            Purchase Order diproses Marketing
+                                                            Draft
                                                             @endif
                                                         </td>
                                                         <td>{{ $data_po->created_at}}</td>
@@ -217,6 +217,19 @@
 >>>>>>> 82e57f0f73677be2a39ac51acddae3c2e2575fcf
                                                         <td>
                                                             @if($data_po->status === 1 )
+                                                            Purchase Order diproses Warehouse
+                                                            @elseif ($data_po->status === 2 )
+                                                            Purchase Order disetujui Warehouse
+                                                            @elseif ($data_po->status === 3 )
+                                                            Purchase Order ditolak Admin
+                                                            @elseif ($data_po->status === 4 )
+                                                            Purchase Order disetujui Warehouse dan dalam proses pembelian
+                                                            @elseif ($data_po->status === 5 )
+                                                            Barang sudah dibeli
+                                                            @else
+                                                            Draft
+                                                            @endif
+                                                            <!-- @if($data_po->status === 1 )
                                                             Purchase Order ditolak Warehouse
                                                             @elseif ($data_po->status === 2 )
                                                             Purchase Order disetujui Warehouse
@@ -228,7 +241,7 @@
                                                             Barang sudah dibeli
                                                             @else
                                                             Purchase Order diproses Marketing
-                                                            @endif
+                                                            @endif -->
                                                         </td>
                                                         <td>{{ $data_po->created_at}}</td>
                                                         <td>
