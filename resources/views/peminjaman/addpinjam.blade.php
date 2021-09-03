@@ -38,25 +38,25 @@
                                         <label class="control-label mb-10 text-left" for="example-email">Nomor PO Barang</label>
                                         <input type="text" id="noPO" name="noPO" class="form-control" readonly>
                                     </div> -->
-                                            <div class="form-group">
-                                                <label class="control-label mb-10 text-left" for="example-email">Kebutuhan<span class="help"> </span></label>
-                                                <input type="text" id="kebutuhan" name="kebutuhan" class="form-control" placeholder="">
-                                                @foreach ((array)$angka as $angka)
-                                                <input type="hidden" id="noPeminjaman" name="noPeminjaman" class="form-control" placeholder="" value = "{{$angka}}">
-                                                @endforeach 
-                                                @error('kebutuhan')
-                                                    <div class="tulisan">{{$message}}</div>
-                                                @enderror
+                                    <div class="row">
+                                        <div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label mb-10">NO Peminjaman</label>
+                                                <input type="text" class="form-control" name="no_peminjaman" id="no_peminjaman" value="" readonly>
+                                                @foreach ((array)$no_peminjaman as $no_peminjaman)
+                                                <input type="hidden" id="no_peminjaman" name="no_peminjaman" class="form-control" placeholder="" value = "{{$no_peminjaman}}">
+                                                @endforeach  
                                             </div>
+										</div>
+                                    </div>    
+                                     
                                     <h5 class="active">Data Barang</h5>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label mb-10 text-left">Nama barang</label>
                                                 <input type="text" class="form-control" name="nama_barang" id="nama_barang">
-                                                @foreach ((array)$angka as $angka)
-                                                <input type="hidden" id="no_peminjaman" name="no_peminjaman" class="form-control" placeholder="" value = "{{$angka}}">
-                                                @endforeach 
+                                                
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -68,9 +68,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label mb-10 text-left" for="example-email">Keterangan<span class="help"> </span></label>
-                                        <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="">
+                                        <label class="control-label mb-10 text-left" for="example-email">Kebutuhan<span class="help"> </span></label>
+                                        <input type="text" id="kebutuhan" name="kebutuhan" class="form-control" placeholder="">
+                                
+                                            @error('kebutuhan')
+                                            <div class="tulisan">{{$message}}</div>
+                                            @enderror
                                     </div>
+                                    
                                     <div class="form-group" style="text-align:right;">
                                         <button type="button" onclick="ambildata()" class="btn btn-primary ">Tambah Data</button>
                                     </div>
@@ -93,7 +98,7 @@
                                                                             <th>No</th>
                                                                             <th>Nama barang</th>
                                                                             <th>Jumlah</th>
-                                                                            <th>Keterangan</th>
+                                                                            <th>Kebutuhan</th>
                                                                             <th>Remove</th>
                                                                         </tr>
                                                                     </thead>
@@ -135,17 +140,17 @@
             var no_peminjaman = document.getElementById('no_peminjaman').value;
             var nama_barang = document.getElementById('nama_barang').value;
             var jumlah = document.getElementById('jumlah').value;
-            var keterangan = document.getElementById('keterangan').value;
-            addrow(no_peminjaman,nama_barang, jumlah, keterangan);
+            var kebutuhan = document.getElementById('kebutuhan').value;
+            addrow(no_peminjaman,nama_barang, jumlah, kebutuhan);
         }
         var i = 0;
 
-        function addrow(no_peminjaman,nama_barang, jumlah, keterangan) {
+        function addrow(no_peminjaman,nama_barang, jumlah, kebutuhan) {
             i++;
             $('#TabelDinamis').append('<tr id="row' + i + '"><td><input type="text" style="outline:none;border:0;" readonly value="' + i +
                                                             '"><td><input type="text" style="outline:none;border:0;" readonly name="nama_barang[]" id="nama_barang" value="' + nama_barang + 
                                                             '"></td><td><input type="text" style="outline:none;border:0;" name="jumlah[]" id="jumlah" value="' + jumlah + 
-                                                            '"></td><td><input type="text" style="outline:none;border:0;" name="keterangan[]" id="keterangan" value="' + keterangan + 
+                                                            '"></td><td><input type="text" style="outline:none;border:0;" name="kebutuhan[]" id="kebutuhan" value="' + kebutuhan + 
                                                             '"></td><td style="display:none;"><input type="text" style="outline:none;border:0;" name="no_peminjaman[]" id="no_peminjaman" value="' + no_peminjaman + 
                                                             '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
         };
