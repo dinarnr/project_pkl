@@ -196,7 +196,7 @@ class PoController extends Controller
 
                 ]
             );
-        return back()->with('success', "Data telah disetujui");
+            return redirect('/po');
     }
 
     public function reject(Request $request)
