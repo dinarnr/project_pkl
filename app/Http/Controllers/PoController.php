@@ -166,32 +166,24 @@ class PoController extends Controller
     }
     public function confirm(Request $request)
     {
-        $user = Auth::user();
-        if ($user->divisi == "warehouse") {
-            PO::where('id_PO', $request->edit_id_po)
-                ->update([
-                    'status' => '$request->is_active',
-                    'pic_warehouse' => $user->name
-                ]);
             $user = Auth::user();
-            Log::create(
+            DetailPO::whereIn('id_po', $request->is_active)
+            ->update(array(
+                    'status'=> '2'
+            ));  
+
+            DetailPO::whereIn('id_po', $request->non)
+            ->update(array(
+                    'status'=> '1'
+            ));  
+
+            PO::where('no_PO', $request->noPO)
+            ->update(
                 [
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'divisi' => $user->divisi,
-                    'deskripsi' => 'Confirm PO',
-                    'status' => '2',
-                    'ip' => $request->ip()
+                'status'=> '2'
                 ]
             );
-        } elseif ($user->divisi == "admin") {
-            PO::where('id_PO', $request->edit_id_po)
-                ->update([
-                    'status' => '4',
-                    'pic_admin' => $user->name
-                ]);
 
-            $user = Auth::user();
             Log::create(
                 [
                     'name' => $user->name,
@@ -203,7 +195,6 @@ class PoController extends Controller
 
                 ]
             );
-        }
         return back()->with('success', "Data telah disetujui");
     }
 
