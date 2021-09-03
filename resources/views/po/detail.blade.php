@@ -96,12 +96,12 @@
                                                         <div class="text-left">
                                                             <h6 class="txt-dark"><strong>PENAWARAN</strong></h6>
                                                         </div>
-                                                        @foreach ($data_po as $detailpo)
+                                                        @foreach ($data_po as $data_po)
                                                         <tr>
                                                             <div class="">
-                                                            <td class="txt-dark"> Number : <input type="text" id="no_PO" name="no_PO" value="{{$data_po->no_PO}}" style="outline:none;border:0;" readonly> <br>
-                                                            Date : {{$data_po->created_at}} <br>
-                                                            Note : </td>
+                                                                <td class="txt-dark"> Number : {{$data_po->no_PO}}<br>
+                                                                    Date : {{$data_po->created_at}} <br>
+                                                                    Note : </td>
                                                             </div>
                                                         </tr>
                                                         @endforeach
@@ -124,7 +124,7 @@
                                                     <th>Qty</th>
                                                     <th>Rate (Rp)</th>
                                                     <th>Amount (Rp)</th>
-                                                    <!-- <th colspan="3">Aksi</th> -->
+                                                    <!-- <th colspan="3">Aksi</th> -->      
                                                 </tr>
                                             </thead>
                                             <tbody>
