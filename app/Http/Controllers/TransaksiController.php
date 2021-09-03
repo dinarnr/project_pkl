@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPO;
 use App\Models\DetailTrkKeluar;
 use App\Models\DetailTrkMasuk;
 use App\Models\Log;
@@ -93,25 +94,18 @@ class TransaksiController extends Controller
         return redirect('/transaksi');
     }
 
-    public function hapus($id,  Request $request){
-        $transaksi_masuk = TransaksiModel::where('id', $id)->first();
-        // // dd($barang);
-        $transaksi_masuk->delete();
+    public function detailmasuk($no_transaksi)
+    {
+        // $data_detail = TransaksiModel::where('no_transaksi', $no_transaksi)->get();
+        // return view('transaksi/detailmasuk', compact('data_detail'));
 
-        $user = Auth::user();
-        Log::create(
-            [
-                'name' => $user->name,
-                'email' => $user->email,
-                'divisi' => $user->divisi,
-                'deskripsi' => 'Delete Data Barang',
-                'status' => '2',
-                'ip' => $request->ip()
+        // $transaksi_masuk = DetailTrkMasuk::where('no_transaksi', $no_transaksi)->get();
+        // return view('transaksi/detailmasuk', compact('transaksi_masuk'));
 
-            ]
-        );
-        // //mengirim data_brg ke view
-        return back()->with('success', "Data telah terhapus");
+        $data_detail = DetailTrkMasuk::where('no_transaksi', $no_transaksi)->get();
+        $transaksi_masuk = TransaksiModel::where('no_transaksi', $no_transaksi)->get();
+        return view('transaksi/detailmasuk', compact('transaksi_masuk', 'data_detail'));
+        // dd($data_detail);
     }
     
     //<!------------masuk returr-----------------------------!>
@@ -184,15 +178,18 @@ class TransaksiController extends Controller
         $transaksi_keluar = TransaksiKeluar::all();
         $data_instansi = Instansi::all();
         $barang = Master::where([['status', 'aktif']])->get();
+        $namabrg = DetailPO::all();
+        // dd($namabrg);
+        $noPO = PO::all();
          // $no_trans = IdGenerator::generate(['table' => 'transaksi_masuk', 'length' => 8, 'prefix' => 'TRK-',date('ym')]);
         $now = Carbon::now();
         $thnBln = $now->year . $now->month;
         $kode = strtoupper(substr("TRK", 0, 3));
-        $check = count(TransaksiModel::where('no_transaksi', 'like', "%$thnBln%")->get()->toArray());
+        $check = count(TransaksiKeluar::where('no_transaksi', 'like', "%$thnBln%")->get()->toArray());
         $angka = sprintf("%03d", (int)$check + 1);
-        $noPO = $thnBln . "" . $angka;
+        // $noPO = $thnBln . "" . $angka;
         $no_trans =  $kode.  "-"  .$now->year . $now->month . $angka;
-        return view('transaksi/addkeluarbaru', compact('no_trans','data_instansi', 'barang', 'transaksi_keluar'));
+        return view('transaksi/addkeluarbaru', compact('no_trans', 'namabrg','noPO','data_instansi', 'barang', 'transaksi_keluar'));
     }
 
     public function addkeluarbaru2(Request $request)
@@ -241,11 +238,11 @@ class TransaksiController extends Controller
         $supplier = SupplierModel::all();
         $noPO = PO::all();
     
-         // $no_trans = IdGenerator::generate(['table' => 'transaksi_masuk', 'length' => 8, 'prefix' => 'TRK-',date('ym')]);
+        //  $no_trans = IdGenerator::generate(['table' => 'transaksi_masuk', 'length' => 12, 'prefix' => 'TRK-'.date('ym')]);
         $now = Carbon::now();
         $thnBln = $now->year . $now->month;
         $kode = strtoupper(substr("TRK", 0, 3));
-        $check = count(TransaksiModel::where('no_transaksi', 'like', "%$thnBln%")->get()->toArray());
+        $check = count(TransaksiKeluar::where('no_transaksi', 'like', "%$thnBln%")->get()->toArray());
         $angka = sprintf("%03d", (int)$check + 1);
         $no_trans =  $kode.  "-"  .$now->year . $now->month . $angka;
         return view('transaksi/addkeluarretur', compact('no_trans', 'noPO','data_instansi','supplier', 'barang', 'transaksi_keluar'));

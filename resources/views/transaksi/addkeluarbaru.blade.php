@@ -38,9 +38,9 @@
 												<div class="row" >
 													<div class="col-md-6">
 															<div class="form-group">
-																<label class="control-label mb-10">Jenis Barang</label>
+																<label class="control-label mb-10" >Jenis Barang</label>
 																<select id="jenistransaksi" name="jenistransaksi" onchange=";" class="form-control">
-																	<option value='' disabled selected style='display:none;'>Pilih Jenis Transaksi</option>
+																	<option value='' disabled selected style='display:none;'>Pilih Jenis Barang</option>
 																	<option value="NO">Barang Instalasi</option>
 																	<option value="YES">Barang Garansi</option>
 																</select>
@@ -93,9 +93,10 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label mb-10">No SO</label>
-																<!-- <input type="text" id="no_PO" name="no_PO" class="form-control" placeholder=""> -->
-																<select name="" id="" class="form-control" >
-																	<option value=""></option>
+																<select name="no_PO" id="no_PO" class="form-control" onChange="changecat(this.value);">
+																	@foreach($noPO as $noPO)
+																	<option value="{{ $noPO->no_PO }}">{{ $noPO->no_PO }}</option>
+																	@endforeach
 																</select>
 															</div>
 														</div>
@@ -103,8 +104,8 @@
 															<div class="form-group">
 																<label class="control-label mb-10">Nama Barang</label>
 																<select name="nama_barang" id="nama_barang" class="form-control">
-																	@foreach($barang as $brg)
-																		<option value="{{ $brg->nama_barang }}">{{ $brg->nama_barang }} | {{ $brg->kode_barang }} </option>
+																	@foreach($namabrg as $brg)
+																		<option value="{{ $brg->nama_barang }}">{{ $brg->nama_barang }} </option>
 																	@endforeach
 																</select>
 															</div>
@@ -244,5 +245,18 @@
     }
 });
 
+</script>
+
+<script>
+	function changecat(value) {
+        if (value.length == 0) document.getElementById("nama_barang").innerHTML = "<option></option>";
+        else {
+            var catOptions = "";
+            for (categoryId in mealsByCategory[value]) {
+                catOptions += "<option>" + mealsByCategory[value][categoryId] + "</option>";
+            }
+            document.getElementById("nama_barang").innerHTML = catOptions;
+        }
+    }
 </script>
 @endsection
