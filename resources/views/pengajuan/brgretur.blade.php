@@ -43,6 +43,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
+                                                    <th>NO PO</th>
                                                     <th>Nama Pengajuan</th>
                                                     <th>Status</th>
                                                     <th>Tanggal pengajuan</th>
@@ -54,6 +55,7 @@
                                                 @foreach ($data_retur as $data_retur)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
+                                                    <td>{{ $data_retur->noPO }}</td>
                                                     <td>{{ $data_retur->judul}}</td>
                                                     <td>
                                                         @if($data_retur->status === 1 )
