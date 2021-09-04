@@ -93,7 +93,6 @@
                                             </div>
                                             <div class="panel-wrapper collapse in">
                                                 <div class="panel-body">
-                                                    <form action="{{ url('addretur2') }}" id="form2" method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="">
                                                             <div class="col">
@@ -110,15 +109,11 @@
                                                                     <tbody id="TabelDinamis">
                                                                         </tbody>
                                                                     </table>
-                                                                    @error('TabelDinamis')
-                                                                    <div class="tulisan">{{$message}}</div>
-                                                                    @enderror
                                                                 <div class="col-md-12" style="text-align:right;">
                                                                     <button type="button" onclick="submitForm()" class="btn btn-primary ">Simpan</button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

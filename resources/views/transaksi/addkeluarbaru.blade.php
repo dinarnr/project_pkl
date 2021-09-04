@@ -38,17 +38,17 @@
 												<div class="row" >
 													<div class="col-md-6">
 															<div class="form-group">
-																<label class="control-label mb-10" >Jenis Barang</label>
+																<label class="control-label mb-10">Jenis Barang</label>
 																<select id="jenistransaksi" name="jenistransaksi" onchange=";" class="form-control">
-																	<option value='' disabled selected style='display:none;'>Pilih Jenis Barang</option>
+																	<option value='' disabled selected style='display:none;'>Pilih Jenis Transaksi</option>
 																	<option value="NO">Barang Instalasi</option>
 																	<option value="YES">Barang Garansi</option>
 																</select>
 															</div>
-														</div>
+												</div>
 													</div>
 												</div>
-												<div class="" id="box-1" style="display:none">	
+												<div class="" id="box-1"  style="display:none">	
 												<div class="row" id=""> 
 													@foreach ((array)$no_trans as $no_trans)
 													<div class="col-md-6">
@@ -59,7 +59,17 @@
 														</div>
 													</div>
 													@endforeach
-													<div class="col-md-6">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label mb-10">NO SO</label>
+                                                            <select name="instansi" id="instansi" class="form-control">
+                                                            	<option value=""></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label mb-10">Instansi</label>
                                                             <select name="instansi" id="instansi" class="form-control">
@@ -69,8 +79,6 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label mb-10">Penerima</label>
@@ -78,6 +86,8 @@
 
 														</div>
 													</div>
+                                                </div>
+                                                <div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label mb-10">Pengirim Ekspedisi</label>
@@ -85,30 +95,30 @@
 														</div>
 													</div>
                                                 </div>
-												
 												<hr>
 											</div>
 												<div id="box-2" style="display:none">
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<label class="control-label mb-10">No SO</label>
-																<select name="no_PO" id="no_PO" class="form-control" onChange="changecat(this.value);">
-																	@foreach($noPO as $noPO)
-																	<option value="{{ $noPO->no_PO }}">{{ $noPO->no_PO }}</option>
+																<label class="control-label mb-10">No PO</label>
+																<select name="no_PO" id="no_PO" class="form-control dynamic1" data-dependent="nama_barang">
+																	<option value="">Pilih No PO</option>
+																	@foreach($bar as $ba)
+																		<option value="{{ $ba->no_PO }}">{{ $ba->no_PO }}</option>
 																	@endforeach
 																</select>
+																
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label mb-10">Nama Barang</label>
-																<select name="nama_barang" id="nama_barang" class="form-control">
-																	@foreach($namabrg as $brg)
-																		<option value="{{ $brg->nama_barang }}">{{ $brg->nama_barang }} </option>
-																	@endforeach
+																<select name="nama_barang" id="nama_barang" >
+																	{{-- <option value="">Pilih Barang</option> --}}
 																</select>
 															</div>
+															
 														</div>
 													</div>
 													<div class="row">
@@ -116,7 +126,9 @@
 															<div class="form-group">
 																<label class="control-label mb-10">Jumlah</label>
 																<input type="number" id="jumlah" name="jumlah" class="form-control">
+																
 																<input  id="kode_barang" name="kode_barang" value="" hidden>
+																
 															</div>
 														</div>
 														<div class="col-md-6">
@@ -131,7 +143,6 @@
 													</div>
 												</div>
                                             </div>
-                                            
                                             <div class="col-md-12 mt-10">
 												<div class="panel panel-default card-view">
 													<div class="panel-heading">
@@ -177,11 +188,7 @@
 													</div>
 												</div>
 											</div>
-
-											<!-- BARANG GARANSI -->
-											<div class="row" id="">
-
-											</div>
+											{{ csrf_field() }}
                                         </form>
                                     </div>
                                 </div>
@@ -245,18 +252,27 @@
     }
 });
 
-</script>
 
+</script>
 <script>
-	function changecat(value) {
-        if (value.length == 0) document.getElementById("nama_barang").innerHTML = "<option></option>";
-        else {
-            var catOptions = "";
-            for (categoryId in mealsByCategory[value]) {
-                catOptions += "<option>" + mealsByCategory[value][categoryId] + "</option>";
-            }
-            document.getElementById("nama_barang").innerHTML = catOptions;
-        }
-    }
+	$('.dynamic1').change(function(){
+		if($(this).val() != ''){
+			var select = $(this).attr("id");
+			var value = $(this).val();
+			console.log(value);
+			var dependent = $(this).data('dependent');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url: "{{ route('fetch')}}",
+				method: "POST",
+				data: {
+					select: select,value: value,_token:_token,dependent: dependent
+				},
+				success: function(result) {
+					$('#'+dependent).html(result);
+				}
+			});
+		}
+	});
 </script>
 @endsection
