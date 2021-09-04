@@ -94,6 +94,9 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('/addkeluarretur2', 'App\Http\Controllers\TransaksiController@addkeluarretur2')->name('addkeluarretur2');
     Route::get('transaki/detailmasuk/{no_transaksi}', 'App\Http\Controllers\TransasksiController@detailmasuk');
     Route::post('/addkeluarbaru/fetch', 'App\Http\Controllers\TransaksiController@fetch')->name('fetch');
+    Route::get('transaksi/detailmasuk/{no_transaksi}', 'App\Http\Controllers\TransaksiController@detailmasuk');
+    Route::get('transaksi/detailmasukretur/{no_transaksi}', 'App\Http\Controllers\TransaksiController@detailmasukretur');
+
 
     // SUPPLIER
     Route::get('supplier', 'App\Http\Controllers\SupplierController@supplier')->name('supplier');

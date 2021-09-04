@@ -168,6 +168,14 @@ class TransaksiController extends Controller
         return redirect('/transaksi');
     } 
 
+    public function detailmasukretur($no_transaksi)
+    {
+        $data_detail = DetailTrkMasuk::where('no_transaksi', $no_transaksi)->get();
+        $transaksi_retur = TransaksiModel::where('no_transaksi', $no_transaksi)->get();
+        return view('transaksi/detailmasukretur', compact('transaksi_retur', 'data_detail'));
+        // dd($data_detail);
+    }
+
     public function brgkeluar()
     {
         return view('transaksi/brgkeluar');

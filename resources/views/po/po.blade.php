@@ -206,15 +206,8 @@
                                                         @elseif (auth()->user()->divisi == "warehouse")
                                                         <td>{{ $no++ }}</td>
                                                         <td>{{ $data_po->no_PO}}</td>
-<<<<<<< HEAD
-                                                        <!-- <td>{{ $data_po->namaBarang}}</td> -->
-                                                        <!-- <td>{{ $data_po->jumlah}}</td> -->
-                                                        <td>{{ $data_po->created_at}}</td>
-                                                        <!-- <td>{{ $data_po->keterangan}}</td> -->
-=======
                                                         <td>{{ $data_po->instansi}}</td>
                                                         <td>{{ $data_po->tgl_pemasangan}}</td>
->>>>>>> 82e57f0f73677be2a39ac51acddae3c2e2575fcf
                                                         <td>
                                                             @if($data_po->status === 1 )
                                                             Purchase Order diproses Warehouse

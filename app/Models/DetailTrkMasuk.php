@@ -13,6 +13,6 @@ class DetailTrkMasuk extends Model
     protected $primaryKey = "id_transaksi";
 
     protected $fillable = [
-        'id', 'no_transaksi', 'tgl_transaksi', 'kode_barang','nama_barang', 'no_P', 'keterangan',  'jumlah', 'nama_supplier', 'instansi', 'pengirim', 'penerima',  'created_at', 'updated_at'
+        'id', 'no_transaksi', 'tgl_transaksi', 'kode_barang','nama_barang', 'no_PO', 'keterangan',  'jumlah', 'nama_supplier', 'instansi', 'pengirim', 'penerima',  'created_at', 'updated_at'
     ];
 }
