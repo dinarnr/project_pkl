@@ -61,7 +61,7 @@ class PeminjamanController extends Controller
             'jumlah'        => $jumlah_barang,
             'kebutuhan'    => $request->kebutuhan,
             'tglPinjam'     => $request->tgl_pinjam,
-            // 'tglKembali'    => $request->tgl_kembali,
+            // 'tglKembali'    => $request->null,
             'status'        => 'pinjam'
         ]);
 
@@ -153,6 +153,42 @@ class PeminjamanController extends Controller
                     'email' => $user->email,
                     'divisi' => $user->divisi,
                     'deskripsi' => 'Pinjaman di Proses Warehouse',
+                    'status' => '2',
+                    'ip' => $request->ip()
+
+                ]
+            );
+            return redirect('/peminjaman');
+    }
+
+    public function confirm(Request $request, $no_peminjaman)
+    {
+        // dd($request->no_peminjaman);
+            $user = Auth::user();
+            DetailPeminjaman::where('no_peminjaman', $no_peminjaman)
+            ->update(
+                [
+                    'status'=> 'Dikembalikan',
+                    
+                ]
+            );  
+ 
+
+            Peminjaman::where('no_peminjaman', $request->no_peminjaman)
+            ->update(
+                [
+                'status'=> 'Dikembalikan',
+                'pic_warehouse' => $user->name,
+                'tglKembali' => Carbon::now()
+                ]
+            );
+
+            Log::create(
+                [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'divisi' => $user->divisi,
+                    'deskripsi' => 'Pinjaman di Konfirmasi Warehouse',
                     'status' => '2',
                     'ip' => $request->ip()
 

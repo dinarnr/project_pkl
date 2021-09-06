@@ -149,6 +149,8 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('/updatePinjam', 'App\Http\Controllers\PeminjamanController@updatePinjam')->name('updatePinjam');
     Route::delete('deletepinjam/{id_peminjaman}', 'App\Http\Controllers\PeminjamanController@deletepinjam');
     Route::post('kembali/{no_peminjaman}', 'App\Http\Controllers\PeminjamanController@kembali');
+    Route::post('confirm/{no_peminjaman}', 'App\Http\Controllers\PeminjamanController@confirm');
+
 
 
     // PO

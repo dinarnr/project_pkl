@@ -58,20 +58,34 @@
                                                     <td>{{ $peminjaman->pic_teknisi }}</td>
                                                     <td>{{ $peminjaman->kebutuhan }}</td>
                                                     <td>{{ date('d-m-Y',strtotime($peminjaman->tglPinjam)) }}</td>
+                                                    
                                                     <td>{{ date('d-m-Y',strtotime($peminjaman->tglKembali)) }}</td>
+                                                    
                                                     <td style="text-align:center;">
                                                         @if($peminjaman->status == 'pinjam')
                                                         <button class="btn btn-primary btn-sm btn-rounded">Pinjam</button>
                                                         @elseif($peminjaman->status == 'Diproses Warehouse')
-                                                        <button class="btn btn-success btn-sm btn-rounded">Diproses Warehouse</button>
+                                                        <button class="btn btn-warning btn-sm btn-rounded">Diproses Warehouse</button>
                                                         @else
                                                         <button class="btn btn-success btn-sm btn-rounded">Dikembalikan</button>
                                                         @endif
                                                     </td>
+                                                    
+
                                                     <td>
                                                         <a href="/peminjaman/{{ $peminjaman->no_peminjaman }}"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
-                                                        <button class="btn btn-success btn-icon-anim btn-square" data-toggle="modal" data-target="#kembali{{ $peminjaman->no_peminjaman }}" action="( {{url('kembali')}}/{{ $peminjaman->no_peminjaman }})"><i class="fa fa-undo"></i></button>
+                                                        @if (auth()->user()->divisi == "teknisi")
+                                                            @if($peminjaman->status == 'pinjam')
+                                                            <button class="btn btn-success btn-icon-anim btn-square" data-toggle="modal" data-target="#kembali{{ $peminjaman->no_peminjaman }}" action="( {{url('kembali')}}/{{ $peminjaman->no_peminjaman }})"><i class="fa fa-undo"></i></button>
+                                                            @endif
+                                                        @endif
+                                                        @if (auth()->user()->divisi == "warehouse")
+                                                            @if($peminjaman->status == 'Diproses Warehouse')
+                                                            <button class="btn btn-success btn-icon-anim btn-square" data-toggle="modal" data-target="#confirm{{ $peminjaman->no_peminjaman}}" action="( {{url('confirm')}}/{{ $peminjaman->no_peminjaman}})"><i class="fa fa-check"></i></button>
+                                                            @endif
+                                                        @endif
                                                         @include('peminjaman.kembali')
+                                                        @include('peminjaman.confirm')
                                                     </td>
                                                 </tr>
                                                 @endforeach
