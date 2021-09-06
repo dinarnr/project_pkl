@@ -121,6 +121,14 @@ class TransaksiController extends Controller
         return back()->with('success', "Data telah terhapus");
     }
 
+    public function detailmasuk($no_transaksi)
+    {
+        $data_detail = DetailTrkMasuk::where('no_transaksi', $no_transaksi)->get();
+        $transaksi_masuk = TransaksiModel::where('no_transaksi', $no_transaksi)->get();
+        return view('transaksi/detailmasuk', compact('transaksi_masuk', 'data_detail'));
+        // dd($data_detail);
+    }
+
     //<!------------masuk returr-----------------------------!>
     public function addmasukretur()
     {

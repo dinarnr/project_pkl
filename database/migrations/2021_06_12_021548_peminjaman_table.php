@@ -15,11 +15,12 @@ class PeminjamanTable extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->increments('id_peminjaman');
-            $table->integer('no_peminjaman');
+            $table->string('no_peminjaman');
             $table->string('kebutuhan',50);
             $table->string('pic_teknisi',50);
             $table->string('pic_warehouse',50)->nullable();
-            $table->integer('status')->nullable();
+            $table->string('status')->nullable();
+            $table->date('tglPinjam')->nullable();
             $table->date('tglKembali')->nullable();
             $table->timestamps();
         });

@@ -34,37 +34,26 @@
                             <div class="form-wrap mt-3">
                                 <form action="{{ url('updatePinjam') }}" method="post" role="form" autocomplete="off">
                                     {{ csrf_field() }}
+                                    
                                     <div class="form-group">
-                                        <input type="hidden" value="{{ $peminjaman->id_peminjaman }}" name="edit_id_pinjam">
-                                        <label class="control-label mb-10 text-left">Nama<span class="help"> </span></label>
-                                        <input type="text" class="form-control" value="{{ $peminjaman->nama }}" name="edit_nama">
+                                        <label class="control-label mb-10 text-left">No<span class="help"> Peminjaman</span></label>
+                                        <input type="text" class="form-control" value="{{ $peminjaman->no_peminjaman }}" name="edit_no" readonly >
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label mb-10 text-left">Nama<span class="help"> Barang</span></label>
-                                        <input type="text" class="form-control" value="{{ $peminjaman->barang }}" name="edit_nama_barang" >
+                                        <label class="control-label mb-10 text-left">Nama Peminjam<span class="help"> </span></label>
+                                        <input type="text" class="form-control" value="{{ $peminjaman->pic_teknisi }}" name="edit_nama" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label mb-10 text-left">Jumlah</label>
-                                        <input type="text" class="form-control" value="{{ $peminjaman->jumlah }}" name="edit_jumlah">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label mb-10 text-left">Keterangan</label>
-                                        <input type="text" class="form-control" value="{{ $peminjaman->keterangan }}" name="edit_keterangan">
+                                        <label class="control-label mb-10 text-left">Kebutuhan</label>
+                                        <input type="text" class="form-control" value="{{ $peminjaman->kebutuhan }}" name="edit_kebutuhan" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label mb-10 text-left">Tanggal Pinjam</label>
-                                        <input type="date" class="form-control" value="{{ $peminjaman->tglPinjam }}" name="edit_tgl_pinjam">
+                                        <input type="date" class="form-control" value="{{ $peminjaman->tglPinjam }}" name="edit_tgl_pinjam"  readonly>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group"> 
                                         <label class="control-label mb-10 text-left">Tanggal Kembali</label>
                                         <input type="date" class="form-control" value="{{ $peminjaman->tglKembali }}" name="edit_tgl_kembali">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label mb-10 text-left">Status</label>
-                                        <select name="edit_status" value="{{ $peminjaman->status }}" class="form-control select2">
-                                            <option value="pinjam">Pinjam</option>
-                                            <option value="dikembalikan">Dikembalikan</option>
-                                        </select>
                                     </div>
                                     <div class="form-group" style="text-align:right;">
                                         <button class="btn btn-success">Simpan</button>

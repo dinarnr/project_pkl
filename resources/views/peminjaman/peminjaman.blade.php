@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Data Supplier')
+@section('title', 'Data Peminjaman')
 @section('content')
 
 <!-- Main Content -->
@@ -40,10 +40,8 @@
                                         <table id="datable_1" class="table table-bordered display pb-30">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>PIC</th>
-                                                    <th>Nama barang</th>
-                                                    <th>Jumlah</th>
+                                                    <th>No Peminjaman</th>
+                                                    <th>Nama Peminjam</th>
                                                     <th>Kebutuhan</th>
                                                     <th>Tanggal Pinjam</th>
                                                     <th>Tanggal kembali</th>
@@ -56,29 +54,29 @@
                                                 <?php $no = 1; ?>
                                                 @foreach($peminjaman as $peminjaman)
                                                 <tr>
-                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $peminjaman->no_peminjaman }}</td>
                                                     <td>{{ $peminjaman->pic_teknisi }}</td>
-                                                    <td>{{ $peminjaman->nama_barang }}</td>
-                                                    <td>{{ $peminjaman->jumlah }}</td>
                                                     <td>{{ $peminjaman->kebutuhan }}</td>
-                                                    <td>{{ $peminjaman->tglPinjam }}</td>
-                                                    <td>{{ $peminjaman->tglKembali }}</td>
+                                                    <td>{{ date('d-m-Y',strtotime($peminjaman->tglPinjam)) }}</td>
+                                                    <td>{{ date('d-m-Y',strtotime($peminjaman->tglKembali)) }}</td>
                                                     <td style="text-align:center;">
                                                         @if($peminjaman->status == 'pinjam')
                                                         <button class="btn btn-primary btn-sm btn-rounded">Pinjam</button>
+                                                        @elseif($peminjaman->status == 'Diproses Warehouse')
+                                                        <button class="btn btn-success btn-sm btn-rounded">Diproses Warehouse</button>
                                                         @else
                                                         <button class="btn btn-success btn-sm btn-rounded">Dikembalikan</button>
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="/peminjaman/{{ $peminjaman->id_peminjaman }}"><button class="btn btn-success btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
-                                                        <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="#hapus{{ $peminjaman->id_peminjaman }}" action="{{ url('deletepinjam') }}/{{ $peminjaman->id_peminjaman }}"><i class="fa fa-trash"></i></button>
-
+                                                        <a href="/peminjaman/{{ $peminjaman->no_peminjaman }}"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
+                                                        <button class="btn btn-success btn-icon-anim btn-square" data-toggle="modal" data-target="#kembali{{ $peminjaman->no_peminjaman }}" action="( {{url('kembali')}}/{{ $peminjaman->no_peminjaman }})"><i class="fa fa-undo"></i></button>
+                                                        @include('peminjaman.kembali')
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                @include('peminjaman.kembali')
                                             </tbody>
-                                            @include('peminjaman.hapus')
                                     </div>
                                 </div>
                             </div>

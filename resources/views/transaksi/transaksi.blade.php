@@ -9,8 +9,6 @@
         <div class="row heading-bg">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h5 class="txt-dark">Data Barang Masuk</h5><br>
-                <!-- <a href="/transaksi" class="btn btn-primary btn-icon-anim"><i class="fa fa succes"></i> MASUK</a>
-                <a href="/transaksikeluar" class="btn btn-primary btn-icon-anim"><i class="fa fa succes"></i> KELUAR</a> -->
             </div>
 
 
@@ -54,12 +52,7 @@
                                                 <th>Supplier</th>
                                                 <th>Pengirim Ekspedisi</th>
                                                 <th>Penerima</th>
-                                                <!-- <th>Created at</th> -->
-                                                <!-- <th>Pengirim</th> -->
-                                                <!-- <th>Penerima</th>/ -->
-                                                <!-- <th>Ekspedisi</th> -->
-                                                <!-- <th>Kondisi</th> -->
-                                                <th colspan="3">Aksi</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -93,10 +86,6 @@
                                                 <th>Pengirim Ekspedisi</th>
                                                 <th>Penerima</th>
                                                 <th>Created at</th>
-                                                <!-- <th>Pengirim</th> -->
-                                                <!-- <th>Penerima</th>/ -->
-                                                <!-- <th>Ekspedisi</th> -->
-                                                <!-- <th>Kondisi</th> -->
                                                 <th colspan="3">Aksi</th>
                                             </tr>
                                         </thead>
@@ -113,7 +102,6 @@
                                                 <td>
                                                     <a href="transaksi/detailmasukretur/{{ $transaksi_retur->no_transaksi }}"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-info"></i></button></a>
                                                     <a href="#"><button class="btn btn-success btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
-                                                    <!-- <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="hapus" action="#"><i class="fa fa-trash"></i></button> -->
                                                 </td>
                                             </tr>
                                             @include('transaksi.hapusbrngmasuk')
