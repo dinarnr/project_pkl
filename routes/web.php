@@ -130,6 +130,11 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('Confirm/{id_pengajuan}', 'App\Http\Controllers\PengajuanController@Confirm');
     Route::post('Reject/{id_pengajuan}', 'App\Http\Controllers\PengajuanController@Reject');
 
+    Route::get('/pengpembelian', 'App\Http\Controllers\PengajuanController@pengpembelian');
+    Route::get('/addpembelian', 'App\Http\Controllers\PengajuanController@addpembelian');
+
+
+
     //PEMBELIAN
     Route::get('/pembelian', 'App\Http\Controllers\PembelianController@pembelian');
     Route::get('/addinvoice/{id_PO}','App\Http\Controllers\PembelianController@addinvoice');

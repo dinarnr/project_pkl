@@ -312,6 +312,11 @@
                             <a href="/brgretur">Barang retur</a>
                         </li>
                         @endif
+                        @if (auth()->user()->divisi == "warehouse"||auth()->user()->divisi == "marketing" ||auth()->user()->divisi == "purchasing" )
+                        <li>
+                            <a href="/pengpembelian">Pengajuan Pembelian</a>
+                        </li>
+                        @endif
                     </ul>
                 </li>
                 @endif
