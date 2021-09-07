@@ -254,4 +254,11 @@ class PoController extends Controller
         // dd($no_PO);
         return view('po/add', compact('no_PO'));
     }
+
+    public function cancelPO($id_po, Request $request)
+    {
+        
+        // //mengirim data_brg ke view
+        return back()->with('success', "Data telah terhapus");
+    }
 }

@@ -194,23 +194,13 @@
                                         Submit
                                     </button>
                                 </div>
-                                <div class="col-md-2 mr-20" style="float:right;">
+                                <div class="col-md-2 " style="float:right;">
                                     <select class="form-control" name="jenis_simpan" id="jenis_simpan">
                                         <option value="1">Proses</option>
                                         <option value="2">Draft</option>
                                     </select>
                                 </div>
                             </div>
-                            
-                            
-
- 
-
-                            <!-- <div class="col-sm-4 col-xs-4">
-                                <div class="form-wrap">
-                                    <form class="form-horizontal"> -->
-
-                            <!-- </form> -->
                         </div>
                     </div>
                     </form>
