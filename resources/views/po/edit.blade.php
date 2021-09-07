@@ -96,7 +96,6 @@
                                                         <div class="text-left">
                                                             <h6 class="txt-dark"><strong>PENAWARAN</strong></h6>
                                                         </div>
-                                                        <form action="{{ url('draft/{no_PO}') }}" method="POST" enctype="multipart/form-data">
                                                         @foreach ($data_po as $data_po)
                                                         <tr>
                                                             <div class="">
@@ -212,6 +211,15 @@
                         </div>
 
                     </div>
+                    <div class="pull-right hide-from-printer">
+                    <form action="{{ url('draft/{no_PO}') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                        <button type="submit" class="btn btn-primary mr-10">
+                            Proses
+                        </button>
+                    </form>
+
+                    </div>
 
                 </div>
                 <!-- /Row -->
@@ -220,22 +228,7 @@
     </div>
     @endif
     
-    <div class="pull-right hide-from-printer">
-        @if (auth()->user()->divisi == "marketing")
-        <button type="submit" class="btn btn-primary mr-10">
-            Proses
-        </button>
-        </form>
-        <!-- form tutup -->
-        @endif
-
-        <!-- @if (auth()->user()->divisi == "marketing")
-        <button type="button" class="btn btn-success btn-icon left-icon" onclick="javascript:window.print();">
-            <i class="fa fa-print"></i><span> Print</span>
-        </button>
-        @endif -->
-    </div>
-
+    
     <!-- /Row -->
     <!-- /Main Content -->
 </div>

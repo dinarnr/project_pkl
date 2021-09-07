@@ -285,8 +285,7 @@ class PoController extends Controller
 
             ]
         );
-
-
+        
         return back()->with('success', "Data telah terhapus");
     }
 
@@ -304,7 +303,8 @@ class PoController extends Controller
     PO::where('no_PO', $no_PO)
             ->update(
                 [
-                    'status' => '2'
+                    'status' => '1'
+                    //status ganti 1
                 ]
             );
 

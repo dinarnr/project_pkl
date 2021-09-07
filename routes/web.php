@@ -174,7 +174,7 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('/add2', 'App\Http\Controllers\PoController@add2')->name('add2');
     Route::post('/draft/{no_PO}', 'App\Http\Controllers\PoController@draft')->name('draft');
 
-
+    
     // ADMINISTRASI
     Route::get('administrator', 'App\Http\Controllers\AdministratorController@users');
     Route::get('log', 'App\Http\Controllers\AdministratorController@log');
