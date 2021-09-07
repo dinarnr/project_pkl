@@ -166,11 +166,9 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::get('po/edit/{no_PO}', [POController::class, 'editpo']);
     Route::delete('deletepo/{id_po}', 'App\Http\Controllers\POController@deletepo');
     Route::get('/add/{no_PO}', 'App\Http\Controllers\PoController@add');
+    Route::post('/add2', 'App\Http\Controllers\PoController@add2')->name('add2');
+    Route::post('/draft/{no_PO}', 'App\Http\Controllers\PoController@draft')->name('draft');
 
-
-
-
-    
 
     // ADMINISTRASI
     Route::get('administrator', 'App\Http\Controllers\AdministratorController@users');

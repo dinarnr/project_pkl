@@ -179,7 +179,7 @@
                                             <div class="form-group">
                                                 <table>
                                                     <div class="text-center">
-                                                        <h6 class="txt-dark">Malang,26 Agustus 2021</h6>
+                                                        <h6 class="txt-dark">Malang, {{ $tanggal->format('d M Y')}}</h6>
                                                     </div><br><br><br><br><br>
 
                                                     <div class="text-center">
