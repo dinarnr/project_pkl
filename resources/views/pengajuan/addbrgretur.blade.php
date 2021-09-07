@@ -33,16 +33,14 @@
                     <div class="panel-wrapper collapse in ">
                         <div class="panel-body">
                             <div class="form-wrap mt-3">
-                                <form action="{{ url('addretur2') }}" id="form1" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('addretur2') }}" method="POST" id="form1" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label mb-10 text-left" for="example-email">Nama pengajuan<span class="help"> </span></label>
                                                 <input type="text" id="nama_pengajuan" name="nama_pengajuan" class="form-control" placeholder="">
-                                                @error('nama_pengajuan')
-                                                <div class="tulisan">{{$message}}</div>
-                                                @enderror
+                                               
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -107,13 +105,23 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="TabelDinamis">
+<<<<<<< HEAD
+                                                                    </tbody>
+                                                                </table>
+                                                                    
+=======
                                                                         </tbody>
                                                                     </table>
+>>>>>>> 03fcbdf9394928f0e8a279cc2858802f4b12a7a9
                                                                 <div class="col-md-12" style="text-align:right;">
                                                                     <button type="button" onclick="submitForm()" class="btn btn-primary ">Simpan</button>
                                                                 </div>
                                                             </div>
                                                         </div>
+<<<<<<< HEAD
+                                                
+=======
+>>>>>>> 03fcbdf9394928f0e8a279cc2858802f4b12a7a9
                                                 </div>
                                             </div>
                                         </div>
@@ -125,11 +133,7 @@
                 </div>
             </div>
         </div>
-        <div class="">
-
-            <!-- Basic Table -->
-
-        </div>
+       
         <!-- /Row -->
         <!-- /Main Content -->
     </div>
@@ -142,16 +146,18 @@
             var nama_barang = document.getElementById('nama_barang').value;
             var jumlah = document.getElementById('jumlah').value;
             var keterangan = document.getElementById('keterangan').value;
-            addrow(nama_pengajuan, nama_barang, jumlah, keterangan);
+            var no_PO = document.getElementById('no_PO').value;
+            addrow(nama_pengajuan, nama_barang, jumlah, keterangan, no_PO);
         }
         var i = 0;
 
-        function addrow(nama_pengajuan, nama_barang, jumlah, keterangan) {
+        function addrow(nama_pengajuan, nama_barang, jumlah, keterangan, no_PO) {
             i++;
             $('#TabelDinamis').append('<tr id="row' + i + '"><td><input type="text" style="outline:none;border:0;" readonly name="nama_pengajuan[]" id="nama_pengajuan" value="' + nama_pengajuan + 
             '"></td><td><input type="text" style="outline:none;border:0;" readonly name="nama_barang[]" id="nama_barang" value="' + nama_barang + 
             '"></td><td><input type="text" style="outline:none;border:0;" name="jumlah[]" id="jumlah" value="' + jumlah + 
             '"></td><td><input type="text" style="outline:none;border:0;" name="keterangan[]" id="keterangan" value="' + keterangan + 
+            '"></td><td style="display:none;"><input type="text" style="outline:none;border:0;" readonly name="no_PO[]" id="no_PO" value="' + no_PO + 
             '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
         };
         $(document).on('click', '.remove_row', function() {
@@ -161,7 +167,10 @@
 
         submitForm = function submitForm() {
             document.getElementById("form1").submit();
-            document.getElementById("form2").submit();
+            // document.getElementById("form2").submit();
         }
+        $('#no_PO').select2()
+        $('#nama_barang').select2()
+
     </script>
     @endsection

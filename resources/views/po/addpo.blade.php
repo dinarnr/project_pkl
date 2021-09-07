@@ -61,12 +61,9 @@
                                                 </select>
                                             </div>
                                         </div>
-
                                         <div class="col-md-2 mt-30">
                                             <div class="form-group">
-
                                                 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#tambahinstansi">Tambah Instansi</button>
-
                                             </div>
                                         </div>
 
@@ -79,21 +76,25 @@
                                             </div>
                                         </div>
                                     </div>
-
-
+                                    <hr>
                                     <div>
-                                        <h5 class="active">Data Barang</h5>
+                                        <h5 class="active text-center">Data Barang</h5>
                                     </div>
-                                    <div class="col-md12">
-                                        <div class="form-group">
-                                            <label class="control-label mb-10 text-left">Nama barang</label>
-                                            <input type="text" class="form-control" name="nama_barang" id="nama_barang">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label mb-10 text-left">Nama barang</label>
+                                                <input type="text" class="form-control" name="nama_barang" id="nama_barang">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label mb-10 text-left" for="example-email">Keterangan<span class="help"> </span></label>
-                                            <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label mb-10 text-left" for="example-email">Keterangan<span class="help"> </span></label>
+                                                <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="">
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="control-label mb-10">Quantity</label>
@@ -132,7 +133,7 @@
                                                                     <tr>
                                                                         <th>Nama barang</th>
                                                                         <th>Quantity</th>
-                                                                        <th>Rate</th>
+                                                                        <th>Rate (Rp)</th>
                                                                         <th>Amount</th>
                                                                         <th>Remove</th>
                                                                     </tr>
@@ -153,49 +154,60 @@
                                     </div>
 
                             </div>
-                            <div class="form-group">
-                                <label for="total" class="col-sm-4 control-label">Total</label>
-                                <div class="">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="total" placeholder="">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="total" class="col-sm-4 control-label">Total (Rp)</label>
+                                    <div class="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="total" name='total' placeholder="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ppn" class="col-sm-4 control-label">PPn (%)</label>
+                                    <div class="">
+                                        <div class="input-group">
+                                            <input type="email" class="form-control" id="ppn" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pph" class="col-sm-4 control-label">PPh (%)</label>
+                                    <div class="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="pph" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="balance" class="col-sm-4 control-label">Balance Due (Rp)</label>
+                                    <div class="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="balance" placeholder="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="ppn" class="col-sm-4 control-label">PPn 10%</label>
-                                <div class="">
-                                    <div class="input-group">
-                                        <input type="email" class="form-control" id="ppn" placeholder="">
+                            <div class="row" style="text-align:right;">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <select name="jenis_simpan" id="jenis_simpan" class="form-control">
+                                            <option value="1">Proses</option>
+                                            <option value="2">Draft</option>
+                                        </select>
                                     </div>
-                                </div>
+                                    
+                                </div> 
+                            <div class="form-group mr-20" style="text-align:right;">
+                                <button class="btn btn-success" name="submit" type="submit">
+                                    Submit
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="pph" class="col-sm-4 control-label">PPh 2.5%</label>
-                                <div class="">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="pph" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="balance" class="col-sm-4 control-label">Balance Due</label>
-                                <div class="">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="balance" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label mb-10 text-left">Jenis Penyimpanan</label>
-                                <select name="jenis_simpan" id="jenis_simpan" class="form-control">
-                                    <option value="1">Proses</option>
-                                    <option value="2">Draft</option>
-                                </select>
-                            </div>
+                            
+                            
 
-                            <div class="col-md-12" style="text-align:right;">
-                                <button type="submit" class="btn btn-primary ">Simpan</button>
-                            </div>
+ 
+
                             <!-- <div class="col-sm-4 col-xs-4">
                                 <div class="form-wrap">
                                     <form class="form-horizontal"> -->
@@ -230,6 +242,7 @@
             amount = amount.join('.').split('').reverse().join('');
             $("#amount").val(amount);
         });
+
     });
 </script>
 @endsection
@@ -272,7 +285,9 @@
         var rate = document.getElementById('rate').value;
         var amount = document.getElementById('amount').value;
         var keterangan = document.getElementById('keterangan').value;
+        var total = document.getElementById('total').value;
         addrow(noPO, nama_barang, jumlah, keterangan, rate, amount);
+
     }
     var i = 0;
 

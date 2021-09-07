@@ -44,6 +44,7 @@
                                                     <th>Nama Pengajuan</th>
                                                     <th>Jumlah</th>
                                                     <th>Keterangan</th>
+                                                    <th>Status</th>
                                                     <th>Tanggal pengajuan</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -54,6 +55,8 @@
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $data_baru->judul}}</td>
+                                                    <td>{{ $data_baru->jumlah}}</td>
+                                                    <td>{{ $data_baru->status}}</td>
                                                     <td>{{ $data_baru->keterangan}}</td>
                                                     <td>{{ $data_baru->created_at}}</td>
                                                     <td>
@@ -116,6 +119,7 @@
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Nama Barang</th>
+                                                            <th>Jumlah</th>
                                                             <th>Keterangan</th>
                                                             <th>Tanggal pengajuan</th>
                                                         </tr>
@@ -128,6 +132,7 @@
                                                             <tr>
                                                                 <td>{{ $no++ }}</td>
                                                                 <td>{{ $data_baru->judul}}</td>
+                                                                <td>{{ $data_baru->jumlah}}</td>
                                                                 <td>{{ $data_baru->keterangan}}</td>
                                                                 <td>{{ $data_baru->created_at}}</td> 
                                                             </tr>

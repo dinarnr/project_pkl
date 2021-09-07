@@ -29,18 +29,19 @@ class PengajuanController extends Controller
 
     public function addbaru2(Request $request)
     {
-        $rules = [
-            'namaBarang' => 'required',
-        ];
+        // $rules = [
+        //     'namaBarang' => 'required',
+        // ];
 
-        $messages = [
-            'namaBarang.required' => '*Nama barang tidak boleh kosong',
-        ];
-        $this->validate($request, $rules, $messages);
+        // $messages = [
+        //     'namaBarang.required' => '*Nama barang tidak boleh kosong',
+        // ];
+        // $this->validate($request);
         $baru = 'Baru';
         Pengajuan::create(
             [
                 'judul' => $request->namaBarang,
+                'jumlah' => $request->jumlah,
                 'keterangan' => $request->keterangan,
                 'jenisBarang' => $baru
             ]
@@ -80,6 +81,7 @@ class PengajuanController extends Controller
         Pengajuan::where('id_pengajuan', $request->edit_id_pengajuan)
             ->update([
                 'judul' => $request->edit_nama,
+                'jumlah' => $request->edit_jumlah,
                 'keterangan' => $request->edit_keterangan
             ]);
 
@@ -149,21 +151,23 @@ class PengajuanController extends Controller
     {
         $user = Auth::user();
 
-        $rules = [
-            'nama_pengajuan' => 'required',
-            'TabelDinamis' => 'required'
-        ];
+        // $rules = [
+        //     'nama_pengajuan' => 'required',
+        //     'TabelDinamis' => 'required'
+        // ];
 
-        $messages = [
-            'nama_pengajuan.required' => '*Nama pengajuan tidak boleh kosong',
-            'TabelDinamis.required' => '*Data tidak boleh kosong'
-        ];
-        $this->validate($request, $rules, $messages);
+        // $messages = [
+        //     'nama_pengajuan.required' => '*Nama pengajuan tidak boleh kosong',
+        //     'TabelDinamis.required' => '*Data tidak boleh kosong'
+        // ];
+        // $this->validate($request);
 
         Pengajuan::create(
             [
-                'kode' => $request->kode_pengajuan,
+                // 'kode' => $request->kode_pengajuan,
                 'judul' => $request->nama_pengajuan,
+                'jumlah' => $request->jumlah,
+                'keterangan' => $request->keterangan,
                 'jenisBarang' => 'Retur',
                 'pic_teknisi' => $user->name
             ]
@@ -172,7 +176,7 @@ class PengajuanController extends Controller
         for ($i = 0; $i < $jumlah_data; $i++) {
             DetailPengajuan::create(
                 [
-                    'kode' => $request->kode_pengajuan,
+                    'kode' => $request->kode_pengajuan[$i],
                     'namaBarang' => $request->nama_barang[$i],
                     'jmlBarang' => $request->jumlah[$i],
                     'noPO' => $request->no_PO[$i],
@@ -194,14 +198,15 @@ class PengajuanController extends Controller
                 ]
             );
         }
-        return redirect('/brgretur');
+        // return redirect('/brgretur');
+        return view('pengajuan/brgretur');
     }
     public function editRetur($id_pengajuan)
     {
         $data_baru = Pengajuan::find($id_pengajuan);
         return view('pengajuan/editbrgretur', compact('data_baru'));
     }
-
+ 
     public function updateRetur(Request $request)
     {
         Pengajuan::where('id_pengajuan', $request->edit_id_pengajuan)

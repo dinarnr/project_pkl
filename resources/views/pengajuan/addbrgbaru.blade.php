@@ -48,6 +48,10 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label mb-10 text-left" for="example-email">Jumlah <span class="help"> </span></label>
+                                        <input type="text" id="jumlah" name="jumlah" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label mb-10 text-left" for="example-email">Keterangan <span class="help"> </span></label>
                                         <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="">
                                     </div>
