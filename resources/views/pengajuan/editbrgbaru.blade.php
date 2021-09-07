@@ -46,6 +46,10 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
+                                            <label class="control-label mb-10 text-left" for="example-email">Jumlah <span class="help"> </span></label>
+                                            <input type="text" value="{{ $data_baru->jumlah }}" name="edit_jumlah" class="form-control" placeholder="">
+                                        </div>
+                                        <div class="form-group">
                                             <label class="control-label mb-10 text-left" for="example-email">Keterangan <span class="help"> </span></label>
                                             <input type="text" value="{{ $data_baru->keterangan }}" name="edit_keterangan" class="form-control" placeholder="">
                                         </div>

@@ -302,12 +302,12 @@
                         <div class="clearfix"></div>
                     </a>
                     <ul id="pengajuan" class="collapse collapse-level-1">
-                        @if (auth()->user()->divisi == "warehouse"||auth()->user()->divisi == "marketing" ||auth()->user()->divisi == "office" ||auth()->user()->divisi == "purchasing" )
+                        @if (auth()->user()->divisi == "warehouse"||auth()->user()->divisi == "marketing" ||auth()->user()->divisi == "office" ||auth()->user()->divisi == "purchasing"||auth()->user()->divisi == "teknisi"  )
                         <li>
                             <a href="/brgbaru">Barang rekomendasi</a>
                         </li>
                         @endif
-                        @if (auth()->user()->divisi == "warehouse"||auth()->user()->divisi == "teknisi" ||auth()->user()->divisi == "office" ||auth()->user()->divisi == "purchasing" )
+                        @if (auth()->user()->divisi == "warehouse"||auth()->user()->divisi == "teknisi" ||auth()->user()->divisi == "marketing" ||auth()->user()->divisi == "purchasing" )
                         <li>
                             <a href="/brgretur">Barang retur</a>
                         </li>
@@ -323,7 +323,7 @@
                     </a>
                 </li>
                 @endif
-                @if (auth()->user()->divisi == "purchasing" ||auth()->user()->divisi == "office")
+                @if (auth()->user()->divisi == "warehouse" ||auth()->user()->divisi == "purchasing" ||auth()->user()->divisi == "office")
                 <li>
                     <a href="javascript:void(0);" data-toggle="collapse" data-target="#pembelian">
                         <div class="pull-left"><i class="zmdi zmdi-shopping-basket mr-20"></i><span class="right-nav-text">Pembelian</span></div>
@@ -332,7 +332,7 @@
                     </a>
                     <ul id="pembelian" class="collapse collapse-level-1">
                         <li>
-                            <a href="/purchase">Purchase Order</a>
+                            <a href="/purchase">Purchasing</a>
                         </li>
                         <li>
                             <a href="/pembelian">Invoice</a>
