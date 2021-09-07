@@ -150,6 +150,8 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::delete('deletepinjam/{id_peminjaman}', 'App\Http\Controllers\PeminjamanController@deletepinjam');
     Route::post('kembali/{no_peminjaman}', 'App\Http\Controllers\PeminjamanController@kembali');
     Route::post('confirm/{no_peminjaman}', 'App\Http\Controllers\PeminjamanController@confirm');
+    Route::get('peminjaman/detail/{peminjaman}', 'App\Http\Controllers\PeminjamanController@detailpeminjaman');
+
 
 
 
@@ -158,9 +160,15 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::get('addpo', 'App\Http\Controllers\PoController@addpo');
     Route::post('/addpo2', 'App\Http\Controllers\PoController@addpo2')->name('addpo2');
     Route::get('po/detail/{no_PO}', 'App\Http\Controllers\PoController@detailpo');
-    Route::post('editpo/{id_PO}', 'App\Http\Controllers\PoController@editpo');
+    // Route::post('editpo/{id_PO}', 'App\Http\Controllers\PoController@editpo');
     Route::post('confirm/{id_PO}', 'App\Http\Controllers\PoController@confirm');
     Route::post('reject/{id_PO}', 'App\Http\Controllers\PoController@reject');
+    Route::get('po/edit/{no_PO}', [POController::class, 'editpo']);
+    Route::delete('deletepo/{id_po}', 'App\Http\Controllers\POController@deletepo');
+    Route::get('/add/{no_PO}', 'App\Http\Controllers\PoController@add');
+
+
+
     
 
     // ADMINISTRASI

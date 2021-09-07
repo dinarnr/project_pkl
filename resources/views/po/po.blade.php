@@ -86,9 +86,10 @@
                                                     <td>{{ $data_po->created_at->format('d-m-y H:i:s')}}</td>
                                                     <td>
                                                         <a href="po/detail/{{ $data_po->no_PO }}"><button class="btn btn-success btn-icon-anim btn-square"><i class="fa fa-info"></i></button></a>
-
+                                                      @if (empty($data_po->status))
+                                                        <a href="po/edit/{{ $data_po->no_PO }}"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
+                                                      @endif
                                                     </td>
-                                                    @include('po.editpo')
                                                 </tr>
                                             </tbody>
                                             @endforeach
