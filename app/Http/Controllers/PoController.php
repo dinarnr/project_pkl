@@ -135,10 +135,10 @@ class PoController extends Controller
     {
         $data_detail = DetailPO::where('no_PO', $no_PO)->get();
         $data_po = PO::where('no_PO', $no_PO)->get();
-
-        return view('po/edit', compact('data_po', 'data_detail'));
-
+        $tanggal = Carbon::now();
+        return view('po/edit', compact('data_po', 'data_detail', 'tanggal'));
     }
+
     public function confirm(Request $request)
     {
         // dd($request->non);
@@ -222,14 +222,14 @@ class PoController extends Controller
         $data_detail = DetailPO::where('no_PO', $no_PO)->get();
         $data_po = PO::where('no_PO', $no_PO)->get();
         // dd($data_detail);
+        $tanggal = Carbon::now();
         $user = Auth::user();
-        return view('po/detail', compact('data_po', 'data_detail', 'user'));
+        return view('po/detail', compact('data_po', 'data_detail', 'user', 'tanggal'));
     }
 
     public function deletepo($id_po, Request $request)
     {
-        $data_detail = PO::where('id_po', $id_po)->first();
-        // // dd($barang);
+        $data_detail = DetailPO::where('id_po', $id_po)->first();
         $data_detail->delete();
 
         $user = Auth::user();
@@ -255,10 +255,70 @@ class PoController extends Controller
         return view('po/add', compact('no_PO'));
     }
 
+    public function add2(Request $request)
+    {
+        $user = Auth::user();
+
+        $jumlah_data = count($request->noPO);
+        for ($i = 0; $i < $jumlah_data; $i++) {
+            DetailPO::create(
+                [
+                    'no_PO' => $request->noPO[$i],
+                    'nama_barang' => $request->nama_barang[$i],
+                    'jumlah' => $request->jumlah[$i],
+                    'rate' => $request->rate[$i],
+                    'amount' => $request->amount[$i],
+                    'keterangan_barang' => $request->keterangan[$i],
+                ]
+            );
+        }
+
+        $user = Auth::user();
+        Log::create(
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Create Detail Draft',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+
+
+        return back()->with('success', "Data telah terhapus");
+    }
+
     public function cancelPO($id_po, Request $request)
     {
-        
+
         // //mengirim data_brg ke view
         return back()->with('success', "Data telah terhapus");
+    }
+
+    public function draft($no_PO, Request $request)
+    {
+        $user = Auth::user();
+
+    PO::where('no_PO', $no_PO)
+            ->update(
+                [
+                    'status' => '2'
+                ]
+            );
+
+        Log::create(
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Update Draft to Proses',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+        return redirect('/po');
     }
 }
