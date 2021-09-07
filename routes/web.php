@@ -93,6 +93,9 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::get('/addkeluarretur', 'App\Http\Controllers\TransaksiController@addkeluarretur');
     Route::post('/addkeluarretur2', 'App\Http\Controllers\TransaksiController@addkeluarretur2')->name('addkeluarretur2');
     Route::get('transaki/detailmasuk/{no_transaksi}', 'App\Http\Controllers\TransasksiController@detailmasuk');
+    Route::post('/addkeluarbaru/fetch', 'App\Http\Controllers\TransaksiController@fetch')->name('fetch');
+    Route::get('transaksi/detailmasuk/{no_transaksi}', 'App\Http\Controllers\TransaksiController@detailmasuk');
+    Route::get('transaksi/detailmasukretur/{no_transaksi}', 'App\Http\Controllers\TransaksiController@detailmasukretur');
 
 
     // SUPPLIER
@@ -145,6 +148,9 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     // Route::get('peminjaman/editpinjam/{id_peminjaman}', [PeminjamanController::class, 'editpinjam']);
     Route::post('/updatePinjam', 'App\Http\Controllers\PeminjamanController@updatePinjam')->name('updatePinjam');
     Route::delete('deletepinjam/{id_peminjaman}', 'App\Http\Controllers\PeminjamanController@deletepinjam');
+    Route::post('kembali/{no_peminjaman}', 'App\Http\Controllers\PeminjamanController@kembali');
+    Route::post('confirm/{no_peminjaman}', 'App\Http\Controllers\PeminjamanController@confirm');
+
 
 
     // PO

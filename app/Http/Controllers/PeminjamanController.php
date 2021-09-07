@@ -34,7 +34,7 @@ class PeminjamanController extends Controller
         $angka = sprintf("%03d", (int)$check + 1);
         $no_peminjaman = $kode . "-" . $angka;
         // dd($no_peminjaman);
-        return view('peminjaman/addpinjam',compact('no_peminjaman'));
+        return view('peminjaman/addpinjam', compact('no_peminjaman'));
     }
 
     public function addpinjam2(Request $request)
@@ -42,28 +42,29 @@ class PeminjamanController extends Controller
         $user = Auth::user();
 
         $jumlah_data = count($request->no_peminjaman);
+
         for ($i = 0; $i < $jumlah_data; $i++) {
             DetailPeminjaman::create(
                 [
+                    'no_peminjaman'  => $request->no_peminjaman[$i],
                     'nama_barang' => $request->nama_barang[$i],
                     'jumlah' => $request->jumlah[$i],
-                    'no_peminjaman' => $request->no_peminjaman[$i],
-                    'kebutuhan' => $request->kebutuhan[$i],
-                ]);
+                    'keterangan' => $request->keterangan[$i],
+                ]
+            );
         }
+        $jumlah_barang = count($request->nama_barang);
 
         Peminjaman::create([
-            'nama'          => $request->nama,
-            // 'no_peminjaman'  => $no_peminjaman,
-            'nama_barang'   => $request->nama_barang,
-            'jumlah'        => $request->jumlah,
+            'pic_teknisi'          => $user->name,
+            'no_peminjaman'  => $request->no_peminjaman2,
+            'jumlah'        => $jumlah_barang,
             'kebutuhan'    => $request->kebutuhan,
             'tglPinjam'     => $request->tgl_pinjam,
-            // 'tglKembali'    => $request->tgl_kembali,
+            // 'tglKembali'    => $request->null,
             'status'        => 'pinjam'
         ]);
 
-        $user = Auth::user();
         Log::create(
             [
                 'name' => $user->name,
@@ -75,8 +76,6 @@ class PeminjamanController extends Controller
 
             ]
         );
-
-       
         return redirect('peminjaman');
     }
 
@@ -95,10 +94,9 @@ class PeminjamanController extends Controller
         }
         Peminjaman::where('id_peminjaman', $request->edit_id_pinjam)
             ->update([
-                'nama'          => $request->edit_nama,
-                'barang'   => $request->edit_nama_barang,
-                'jumlah'        => $request->edit_jumlah,
-                'kebutuhan'    => $request->edit_kebutuhan,
+                'pic_teknisi'   => $request->edit_nama,
+                'no_peminjaman' => $request->edit_no,
+                'kebutuhan'     => $request->edit_kebutuhan,
                 'tglPinjam'     => $request->edit_tgl_pinjam,
                 'tglKembali'    => $request->edit_tgl_kembali,
                 'status'        => $status
@@ -108,7 +106,7 @@ class PeminjamanController extends Controller
     }
     public function deletepinjam($id_peminjaman, Request $request)
     {
-        
+
         $data_peminjaman = Peminjaman::where('id_peminjaman', $id_peminjaman)->first();
         // // dd($barang);
         $data_peminjaman->delete();
@@ -117,16 +115,85 @@ class PeminjamanController extends Controller
         $user = Auth::user();
         Log::create(
             [
-            'name' => $user->name,
-            'email' => $user->email,
-            'divisi' => $user->divisi,
-            'deskripsi' => 'Delete Peminjaman',
-            'status' => '2',
-            'ip'=> $request->ip()
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Delete Peminjaman',
+                'status' => '2',
+                'ip' => $request->ip()
 
             ]
         );
 
         return back()->with('success', "Data telah terhapus");
+    }
+    public function kembali(Request $request, $no_peminjaman)
+    {
+        // dd($request->no_peminjaman);
+            $user = Auth::user();
+            DetailPeminjaman::where('no_peminjaman', $no_peminjaman)
+            ->update(
+                [
+                    'status'=> 'Diproses Warehouse',
+                ]
+            );  
+ 
+
+            Peminjaman::where('no_peminjaman', $request->no_peminjaman)
+            ->update(
+                [
+                'status'=> 'Diproses Warehouse',
+                'tglKembali' => Carbon::now()
+                ]
+            );
+
+            Log::create(
+                [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'divisi' => $user->divisi,
+                    'deskripsi' => 'Pinjaman di Proses Warehouse',
+                    'status' => '2',
+                    'ip' => $request->ip()
+
+                ]
+            );
+            return redirect('/peminjaman');
+    }
+
+    public function confirm(Request $request, $no_peminjaman)
+    {
+        // dd($request->no_peminjaman);
+            $user = Auth::user();
+            DetailPeminjaman::where('no_peminjaman', $no_peminjaman)
+            ->update(
+                [
+                    'status'=> 'Dikembalikan',
+                    
+                ]
+            );  
+ 
+
+            Peminjaman::where('no_peminjaman', $request->no_peminjaman)
+            ->update(
+                [
+                'status'=> 'Dikembalikan',
+                'pic_warehouse' => $user->name,
+                'tglKembali' => Carbon::now()
+                ]
+            );
+
+            Log::create(
+                [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'divisi' => $user->divisi,
+                    'deskripsi' => 'Pinjaman di Konfirmasi Warehouse',
+                    'status' => '2',
+                    'ip' => $request->ip()
+
+                ]
+            );
+            return redirect('/peminjaman');
     }
 }

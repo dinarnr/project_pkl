@@ -105,15 +105,23 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="TabelDinamis">
+<<<<<<< HEAD
                                                                     </tbody>
                                                                 </table>
                                                                     
+=======
+                                                                        </tbody>
+                                                                    </table>
+>>>>>>> 03fcbdf9394928f0e8a279cc2858802f4b12a7a9
                                                                 <div class="col-md-12" style="text-align:right;">
                                                                     <button type="button" onclick="submitForm()" class="btn btn-primary ">Simpan</button>
                                                                 </div>
                                                             </div>
                                                         </div>
+<<<<<<< HEAD
                                                 
+=======
+>>>>>>> 03fcbdf9394928f0e8a279cc2858802f4b12a7a9
                                                 </div>
                                             </div>
                                         </div>

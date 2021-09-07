@@ -15,7 +15,7 @@ class DetailPeminjamanTable extends Migration
     {
         Schema::create('detail_peminjaman', function (Blueprint $table) {
             $table->increments('id_peminjaman');
-            $table->integer('no_peminjaman');
+            $table->string('no_peminjaman');
             $table->string('nama_barang',50);
             $table->integer('jumlah');
             $table->string('keterangan')->nullable();
