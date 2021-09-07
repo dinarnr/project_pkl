@@ -167,7 +167,7 @@
                                     <label for="ppn" class="col-sm-4 control-label">PPn (%)</label>
                                     <div class="">
                                         <div class="input-group">
-                                            <input type="email" class="form-control" id="ppn" placeholder="">
+                                            <input type="email" class="form-control" id="ppn" placeholder="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -183,25 +183,23 @@
                                     <label for="balance" class="col-sm-4 control-label">Balance Due (Rp)</label>
                                     <div class="">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="balance" placeholder="">
+                                            <input type="text" class="form-control" id="balance" placeholder="" readonly>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" style="text-align:right;">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select name="jenis_simpan" id="jenis_simpan" class="form-control">
-                                            <option value="1">Proses</option>
-                                            <option value="2">Draft</option>
-                                        </select>
-                                    </div>
-                                    
-                                </div> 
-                            <div class="form-group mr-20" style="text-align:right;">
-                                <button class="btn btn-success" name="submit" type="submit">
-                                    Submit
-                                </button>
+                            <div class="row">
+                                <div class="col-md-2" style="float:right;">
+                                    <button class="btn btn-success" name="submit" type="submit">
+                                        Submit
+                                    </button>
+                                </div>
+                                <div class="col-md-2 mr-20" style="float:right;">
+                                    <select class="form-control" name="jenis_simpan" id="jenis_simpan">
+                                        <option value="1">Proses</option>
+                                        <option value="2">Draft</option>
+                                    </select>
+                                </div>
                             </div>
                             
                             
@@ -290,6 +288,20 @@
 
     }
     var i = 0;
+    var total = 0;
+    function pecah(bilangan) {
+        var number_string = bilangan.toString(),
+        sisa = number_string.length % 3,
+        rupiah = number_string.substr(0, sisa),
+        ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+        if(ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        return rupiah;
+    }
 
     function addrow(noPO, nama_barang, jumlah, keterangan, rate, amount) {
         i++;
@@ -298,11 +310,19 @@
             '"><br><input type="text" style="outline:none;border:0;" name="keterangan[]" id="keterangan" value="    ' + keterangan +
             '"></br ></td><td><input type="text" style="outline:none;border:0;" readonly name="jumlah[]" id="jumlah" value="' + jumlah +
             '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="rate[]" id="rate" value="' + rate +
-            '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="amount[]" id="amount" value="' + amount +
+            '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="amount[]" id="amount' + i + '" value="' + amount +
             '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
+        total = (parseInt(total) + parseInt(amount.split('.').join(''))).toString().split('').join('');
+        $("#total").val(pecah(total));
+        $("#ppn").val(pecah(total / 10));
+        $("#balance").val(pecah(parseInt(total) + parseInt(total / 10)));
     };
     $(document).on('click', '.remove_row', function() {
         var row_id = $(this).attr("id");
+        total = (parseInt(total) - parseInt($('#amount' + row_id + '').val().split('.').join(''))).toString().split('').join('');
+        $("#total").val(pecah(total));
+        $("#ppn").val(pecah(total / 10));
+        $("#balance").val(pecah(parseInt(total) + parseInt(total / 10)));
         $('#row' + row_id + '').remove();
     });
 
