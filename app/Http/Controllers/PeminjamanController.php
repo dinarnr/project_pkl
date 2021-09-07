@@ -196,4 +196,13 @@ class PeminjamanController extends Controller
             );
             return redirect('/peminjaman');
     }
+
+    public function detailpeminjaman($no_peminjaman)
+    {
+        $data_detail = DetailPeminjaman::where('no_peminjaman', $no_peminjaman)->get();
+        $peminjaman = Peminjaman::where('no_peminjaman', $no_peminjaman)->get();
+        // dd($data_detail);
+        // $user = Auth::user();
+        return view('peminjaman/detail', compact('peminjaman', 'data_detail'));
+    }
 }

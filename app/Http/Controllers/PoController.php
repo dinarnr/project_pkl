@@ -43,160 +43,135 @@ class PoController extends Controller
     public function addpo2(Request $request)
     {
         $user = Auth::user();
-        if($request->jenis_simpan == '1'){
+        if ($request->jenis_simpan == '1') {
 
-    
-        // $rules = [
-        //     'TabelDinamis' => 'required'
-        // ];
 
-        // $messages = [
-        //     'TabelDinamis.required' => '*Data tidak boleh kosong'
-        // ];
-        // $this->validate($request, $rules, $messages);
+            // $rules = [
+            //     'TabelDinamis' => 'required'
+            // ];
 
-        $jumlah_data = count($request->noPO);
-        for ($i = 0; $i < $jumlah_data; $i++) {
-            DetailPO::create(
+            // $messages = [
+            //     'TabelDinamis.required' => '*Data tidak boleh kosong'
+            // ];
+            // $this->validate($request, $rules, $messages);
+
+            $jumlah_data = count($request->noPO);
+            for ($i = 0; $i < $jumlah_data; $i++) {
+                DetailPO::create(
+                    [
+                        'no_PO' => $request->noPO[$i],
+                        'nama_barang' => $request->nama_barang[$i],
+                        'jumlah' => $request->jumlah[$i],
+                        'rate' => $request->rate[$i],
+                        'amount' => $request->amount[$i],
+                        'keterangan_barang' => $request->keterangan[$i],
+                    ]
+                );
+            }
+
+            PO::create(
                 [
-                    'no_PO' => $request->noPO[$i],
-                    'nama_barang' => $request->nama_barang[$i],
-                    'jumlah' => $request->jumlah[$i],
-                    'rate' => $request->rate[$i],
-                    'amount' => $request->amount[$i],
-                    'keterangan_barang' => $request->keterangan[$i],
+                    'no_PO' => $request->no_PO,
+                    'instansi' => $request->instansi,
+                    'tgl_pemasangan' => $request->tgl_transaksi,
+                    'pic_marketing' => $user->name,
+                    'status' => '1'
                 ]
             );
-        }
 
-        PO::create(
-            [
-                'no_PO' => $request->no_PO,
-                'instansi' => $request->instansi,
-                'tgl_pemasangan' => $request->tgl_transaksi,
-                'pic_marketing' => $user->name,
-                'status' => '1'
-            ]
-        );
-
-        $user = Auth::user();
-        Log::create(
-            [
-                'name' => $user->name,
-                'email' => $user->email,
-                'divisi' => $user->divisi,
-                'deskripsi' => 'Create PO',
-                'status' => '2',
-                'ip' => $request->ip()
-
-            ]
-        );
-    } elseif($request->jenis_simpan == '2'){
-        $jumlah_data = count($request->noPO);
-        for ($i = 0; $i < $jumlah_data; $i++) {
-            DetailPO::create(
-                [
-                    'no_PO' => $request->noPO[$i],
-                    'nama_barang' => $request->nama_barang[$i],
-                    'jumlah' => $request->jumlah[$i],
-                    'rate' => $request->rate[$i],
-                    'amount' => $request->amount[$i],
-                    'keterangan_barang' => $request->keterangan[$i],
-                ]
-            );
-        }
-
-        PO::create(
-            [
-                'no_PO' => $request->no_PO,
-                'instansi' => $request->instansi,
-                'tgl_pemasangan' => $request->tgl_transaksi,
-                'pic_marketing' => $user->name
-            ]
-        );
-
-        $user = Auth::user();
-        Log::create(
-            [
-                'name' => $user->name,
-                'email' => $user->email,
-                'divisi' => $user->divisi,
-                'deskripsi' => 'Create PO',
-                'status' => '2',
-                'ip' => $request->ip()
-
-            ]
-        );
-    }
-
-        return redirect('/po');
-    }
-    public function editpo(Request $request)
-    {
-        $rules = [
-            'namaBarang' => 'required',
-            'jumlah' => 'required',
-        ];
-
-        $messages = [
-            'namaBarang.required' => '*Nama barang tidak boleh kosong',
-            'jumlah.required' => '*Jumlah barang tidak boleh kosong',
-        ];
-        $this->validate($request, $rules, $messages);
-        PO::where('id_PO', $request->edit_id_po)
-            ->update([
-                'namaBarang' => $request->namaBarang,
-                'jumlah' => $request->jumlah,
-                'keterangan' => $request->keterangan
-            ]);
-
-        $user = Auth::user();
-        Log::create(
-            [
-                'name' => $user->name,
-                'email' => $user->email,
-                'divisi' => $user->divisi,
-                'deskripsi' => 'Update PO',
-                'status' => '2',
-                'ip' => $request->ip()
-
-            ]
-        );
-        return back()->with('success', "Data telah diperbarui");
-    }
-    public function confirm(Request $request)
-    {
-        // dd($request->non);
             $user = Auth::user();
-            DetailPO::whereIn('id_po', $request->is_active)
-            ->update(array(
-                    'status'=> '2'
-            ));  
-
-            // DetailPO::whereIn('id_po', $request->non)
-            // ->update(array(
-            //         'status'=> '1'
-            // ));  
-
-            PO::where('no_PO', $request->no_PO)
-            ->update(
-                [
-                'status'=> '2'
-                ]
-            );
-
             Log::create(
                 [
                     'name' => $user->name,
                     'email' => $user->email,
                     'divisi' => $user->divisi,
-                    'deskripsi' => 'Confirm PO',
+                    'deskripsi' => 'Create PO',
                     'status' => '2',
                     'ip' => $request->ip()
 
                 ]
             );
-            return redirect('/po');
+        } elseif ($request->jenis_simpan == '2') {
+            $jumlah_data = count($request->noPO);
+            for ($i = 0; $i < $jumlah_data; $i++) {
+                DetailPO::create(
+                    [
+                        'no_PO' => $request->noPO[$i],
+                        'nama_barang' => $request->nama_barang[$i],
+                        'jumlah' => $request->jumlah[$i],
+                        'rate' => $request->rate[$i],
+                        'amount' => $request->amount[$i],
+                        'keterangan_barang' => $request->keterangan[$i],
+                    ]
+                );
+            }
+
+            PO::create(
+                [
+                    'no_PO' => $request->no_PO,
+                    'instansi' => $request->instansi,
+                    'tgl_pemasangan' => $request->tgl_transaksi,
+                    'pic_marketing' => $user->name
+                ]
+            );
+
+            $user = Auth::user();
+            Log::create(
+                [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'divisi' => $user->divisi,
+                    'deskripsi' => 'Create PO',
+                    'status' => '2',
+                    'ip' => $request->ip()
+
+                ]
+            );
+        }
+
+        return redirect('/po');
+    }
+    public function editpo($no_PO)
+    {
+        $data_detail = DetailPO::where('no_PO', $no_PO)->get();
+        $data_po = PO::where('no_PO', $no_PO)->get();
+
+        return view('po/edit', compact('data_po', 'data_detail'));
+
+    }
+    public function confirm(Request $request)
+    {
+        // dd($request->non);
+        $user = Auth::user();
+        DetailPO::whereIn('id_po', $request->is_active)
+            ->update(array(
+                'status' => '2'
+            ));
+
+        // DetailPO::whereIn('id_po', $request->non)
+        // ->update(array(
+        //         'status'=> '1'
+        // ));  
+
+        PO::where('no_PO', $request->no_PO)
+            ->update(
+                [
+                    'status' => '2'
+                ]
+            );
+
+        Log::create(
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Confirm PO',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+        return redirect('/po');
     }
 
     public function reject(Request $request)
@@ -218,7 +193,6 @@ class PoController extends Controller
                     'deskripsi' => 'Reject PO',
                     'status' => '2',
                     'ip' => $request->ip()
-
                 ]
             );
         } elseif ($user->divisi == "admin") {
@@ -228,7 +202,6 @@ class PoController extends Controller
                     'keterangan' => $request->keterangan,
                     'pic_warehouse' => $user->name
                 ]);
-
             $user = Auth::user();
             Log::create(
                 [
@@ -238,7 +211,6 @@ class PoController extends Controller
                     'deskripsi' => 'Reject PO',
                     'status' => '2',
                     'ip' => $request->ip()
-
                 ]
             );
         }
@@ -254,11 +226,39 @@ class PoController extends Controller
         return view('po/detail', compact('data_po', 'data_detail', 'user'));
     }
 
-    // public function insertCB(Request $request)
-    // {
-    //     $detail = new DetailPO();
-    //     $detail->is_active = $request->has('is_active');
+    public function deletepo($id_po, Request $request)
+    {
+        $data_detail = PO::where('id_po', $id_po)->first();
+        // // dd($barang);
+        $data_detail->delete();
 
-    //     return $detail;
-    // }
+        $user = Auth::user();
+        Log::create(
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Delete Data Detail PO',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+        // //mengirim data_brg ke view
+        return back()->with('success', "Data telah terhapus");
+    }
+
+    public function add($no_PO)
+    {
+        $no_PO = $no_PO;
+        // dd($no_PO);
+        return view('po/add', compact('no_PO'));
+    }
+
+    public function cancelPO($id_po, Request $request)
+    {
+        
+        // //mengirim data_brg ke view
+        return back()->with('success', "Data telah terhapus");
+    }
 }

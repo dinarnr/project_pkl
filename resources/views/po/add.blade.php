@@ -34,67 +34,25 @@
                     <div class="panel-wrapper collapse in ">
                         <div class="panel-body">
                             <div class="form-wrap mt-3">
-                                <form action="{{ url('addpo2') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('add2') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <!-- <div class="form-group">
-                                        <label class="control-label mb-10 text-left" for="example-email">Nomor PO Barang</label>
-                                        <input type="text" id="noPO" name="noPO" class="form-control" readonly>
-                                    </div> -->
-                                    <div class="row">
-                                        @foreach ((array)$noPO as $noPO)
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label mb-10 text-left" for="example-email">No Purchase Order</label>
-                                                <input type="hidden" id="no_PO" name="no_PO" value="{{ $noPO }}" class="form-control" placeholder="" readonly>
-                                                <input type="text" id="noPO" name="noPO" value="{{ $noPO }}" class="form-control" placeholder="" readonly>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="control-label mb-10 text-left" for="example-email">Instansi<span class="help"> </span></label>
-                                                <!-- <input type="text" id="instansi" name="instansi" class="form-control" placeholder=""> -->
-                                                <select name="instansi" id="instansi" class="form-control">
-                                                    @foreach($data_instansi as $data_int)
-                                                    <option value="{{ $data_int->nama_instansi}}">{{ $data_int->kode_instansi }} | {{ $data_int->nama_instansi }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 mt-30">
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#tambahinstansi">Tambah Instansi</button>
-                                            </div>
-                                        </div>
+    
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label mb-10">Tanggal Pemasangan</label>
-                                                <input type="date" name="tgl_transaksi" id="tgl_transaksi" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
+
                                     <div>
-                                        <h5 class="active text-center">Data Barang</h5>
+                                        <h5 class="active">Data Barang</h5>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label mb-10 text-left">Nama barang</label>
-                                                <input type="text" class="form-control" name="nama_barang" id="nama_barang">
-                                            </div>
+                                    <div class="col-md12">
+                                        <div class="form-group">
+                                            <label class="control-label mb-10 text-left">Nama barang</label>
+                                            <input type="text" class="form-control" name="nama_barang" id="nama_barang">
+                                            <input type="hidden" class="form-control" name="noPO" id="noPO" value="{{$no_PO}}">
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label mb-10 text-left" for="example-email">Keterangan<span class="help"> </span></label>
-                                                <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="">
-                                            </div>
+                                        <div class="form-group">
+                                            <label class="control-label mb-10 text-left" for="example-email">Keterangan<span class="help"> </span></label>
+                                            <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="">
                                         </div>
                                     </div>
-                                    
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="control-label mb-10">Quantity</label>
@@ -133,7 +91,7 @@
                                                                     <tr>
                                                                         <th>Nama barang</th>
                                                                         <th>Quantity</th>
-                                                                        <th>Rate (Rp)</th>
+                                                                        <th>Rate</th>
                                                                         <th>Amount</th>
                                                                         <th>Remove</th>
                                                                     </tr>
@@ -154,53 +112,54 @@
                                     </div>
 
                             </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="total" class="col-sm-4 control-label">Total (Rp)</label>
-                                    <div class="">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="total" name='total' placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ppn" class="col-sm-4 control-label">PPn (%)</label>
-                                    <div class="">
-                                        <div class="input-group">
-                                            <input type="email" class="form-control" id="ppn" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pph" class="col-sm-4 control-label">PPh (%)</label>
-                                    <div class="">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="pph" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="balance" class="col-sm-4 control-label">Balance Due (Rp)</label>
-                                    <div class="">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="balance" placeholder="" readonly>
-                                        </div>
+                            <div class="form-group">
+                                <label for="total" class="col-sm-4 control-label">Total</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="total" placeholder="">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2" style="float:right;">
-                                    <button class="btn btn-success" name="submit" type="submit">
-                                        Submit
-                                    </button>
-                                </div>
-                                <div class="col-md-2 " style="float:right;">
-                                    <select class="form-control" name="jenis_simpan" id="jenis_simpan">
-                                        <option value="1">Proses</option>
-                                        <option value="2">Draft</option>
-                                    </select>
+                            <div class="form-group">
+                                <label for="ppn" class="col-sm-4 control-label">PPn 10%</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" id="ppn" placeholder="">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="pph" class="col-sm-4 control-label">PPh 2.5%</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="pph" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="balance" class="col-sm-4 control-label">Balance Due</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="balance" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label mb-10 text-left">Jenis Penyimpanan</label>
+                                <select name="jenis_simpan" id="jenis_simpan" class="form-control">
+                                    <option value="1">Proses</option>
+                                    <option value="2">Draft</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12" style="text-align:right;">
+                                <button type="submit" class="btn btn-primary ">Simpan</button>
+                            </div>
+                            <!-- <div class="col-sm-4 col-xs-4">
+                                <div class="form-wrap">
+                                    <form class="form-horizontal"> -->
+
+                            <!-- </form> -->
                         </div>
                     </div>
                     </form>
@@ -230,7 +189,6 @@
             amount = amount.join('.').split('').reverse().join('');
             $("#amount").val(amount);
         });
-
     });
 </script>
 @endsection
@@ -273,25 +231,9 @@
         var rate = document.getElementById('rate').value;
         var amount = document.getElementById('amount').value;
         var keterangan = document.getElementById('keterangan').value;
-        var total = document.getElementById('total').value;
         addrow(noPO, nama_barang, jumlah, keterangan, rate, amount);
-
     }
     var i = 0;
-    var total = 0;
-    function pecah(bilangan) {
-        var number_string = bilangan.toString(),
-        sisa = number_string.length % 3,
-        rupiah = number_string.substr(0, sisa),
-        ribuan = number_string.substr(sisa).match(/\d{3}/g);
-
-        if(ribuan) {
-            separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
-
-        return rupiah;
-    }
 
     function addrow(noPO, nama_barang, jumlah, keterangan, rate, amount) {
         i++;
@@ -300,19 +242,11 @@
             '"><br><input type="text" style="outline:none;border:0;" name="keterangan[]" id="keterangan" value="    ' + keterangan +
             '"></br ></td><td><input type="text" style="outline:none;border:0;" readonly name="jumlah[]" id="jumlah" value="' + jumlah +
             '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="rate[]" id="rate" value="' + rate +
-            '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="amount[]" id="amount' + i + '" value="' + amount +
+            '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="amount[]" id="amount" value="' + amount +
             '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
-        total = (parseInt(total) + parseInt(amount.split('.').join(''))).toString().split('').join('');
-        $("#total").val(pecah(total));
-        $("#ppn").val(pecah(total / 10));
-        $("#balance").val(pecah(parseInt(total) + parseInt(total / 10)));
     };
     $(document).on('click', '.remove_row', function() {
         var row_id = $(this).attr("id");
-        total = (parseInt(total) - parseInt($('#amount' + row_id + '').val().split('.').join(''))).toString().split('').join('');
-        $("#total").val(pecah(total));
-        $("#ppn").val(pecah(total / 10));
-        $("#balance").val(pecah(parseInt(total) + parseInt(total / 10)));
         $('#row' + row_id + '').remove();
     });
 

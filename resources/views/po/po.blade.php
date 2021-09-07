@@ -86,9 +86,12 @@
                                                     <td>{{ $data_po->created_at->format('d-m-y H:i:s')}}</td>
                                                     <td>
                                                         <a href="po/detail/{{ $data_po->no_PO }}"><button class="btn btn-success btn-icon-anim btn-square"><i class="fa fa-info"></i></button></a>
+                                                      @if (empty($data_po->status))
+                                                        <a href="po/edit/{{ $data_po->no_PO }}"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
+                                                      @endif
+                                                      <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="#cancel{{ $data_po->id_po }}" action="( {{url('cancelPO')}}/{{ $data_po->id_po }})"><i class="fa fa-times"></i></button>
 
                                                     </td>
-                                                    @include('po.editpo')
                                                 </tr>
                                             </tbody>
                                             @endforeach
