@@ -317,15 +317,16 @@
             '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
         total = (parseInt(total) + parseInt(amount.split('.').join(''))).toString().split('').join('');
         $("#total").val(pecah(total));
-        $("#ppn").val(pecah(total / 10));
-        $("#balance").val(pecah(parseInt(total) + parseInt(total / 10)));
+        var ppn = $('#ppn').val();
+        var pph = $('#pph').val();
+        $("#balance").val(pecah(parseInt(total) + ((ppn/100)*parseInt(total)) + ((pph/100)*parseInt(total))));
     };
     $(document).on('click', '.remove_row', function() {
         var row_id = $(this).attr("id");
         total = (parseInt(total) - parseInt($('#amount' + row_id + '').val().split('.').join(''))).toString().split('').join('');
         $("#total").val(pecah(total));
-        $("#ppn").val(pecah(total / 10));
-        $("#balance").val(pecah(parseInt(total) + parseInt(total / 10)));
+        var pph = $('#pph').val();
+        $("#balance").val(pecah(parseInt(total) + ((ppn/100)*parseInt(total)) + ((pph/100)*parseInt(total))));
         $('#row' + row_id + '').remove();
     });
 
