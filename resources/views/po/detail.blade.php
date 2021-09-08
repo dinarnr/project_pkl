@@ -151,23 +151,23 @@
                                                     <td colspan="4"></td>
 
                                                     <td>Total</td>
-                                                    <td>#</td>
+                                                    <td>{{$detail->total}}</td>
                                                 </tr>
                                     </div>
                                     <tr class="txt-dark">
                                         <td colspan="4"></td>
                                         <td>PPn 10%</td>
-                                        <td>#</td>
+                                        <td>{{$detail->ppn}}</td>
                                     </tr>
                                     <tr class="txt-dark">
                                         <td colspan="4"></td>
                                         <td>PPh 2.5%</td>
-                                        <td>#</td>
+                                        <td></td>
                                     </tr>
                                     <tr class="txt-dark">
                                         <td colspan="4"></td>
                                         <td>Balance Due</td>
-                                        <td>#</td>
+                                        <td>{{$detail->balance}}</td>
                                     </tr>
                                     </tbody>
                                     </table>

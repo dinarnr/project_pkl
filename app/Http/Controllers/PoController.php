@@ -43,55 +43,44 @@ class PoController extends Controller
     public function addpo2(Request $request)
     {
         $user = Auth::user();
-        if ($request->jenis_simpan == '1') {
-
-
-            // $rules = [
-            //     'TabelDinamis' => 'required'
-            // ];
-
-            // $messages = [
-            //     'TabelDinamis.required' => '*Data tidak boleh kosong'
-            // ];
-            // $this->validate($request, $rules, $messages);
-
-            $jumlah_data = count($request->noPO);
-            for ($i = 0; $i < $jumlah_data; $i++) {
-                DetailPO::create(
-                    [
-                        'no_PO' => $request->noPO[$i],
-                        'nama_barang' => $request->nama_barang[$i],
-                        'jumlah' => $request->jumlah[$i],
-                        'rate' => $request->rate[$i],
-                        'amount' => $request->amount[$i],
-                        'keterangan_barang' => $request->keterangan[$i],
-                    ]
-                );
-            }
-
-            PO::create(
+        if ($request->proses == 'proses') {
+        $jumlah_data = count($request->noPO);
+        for ($i = 0; $i < $jumlah_data; $i++) {
+            DetailPO::create(
                 [
-                    'no_PO' => $request->no_PO,
-                    'instansi' => $request->instansi,
-                    'tgl_pemasangan' => $request->tgl_transaksi,
-                    'pic_marketing' => $user->name,
-                    'status' => '1'
+                    'no_PO' => $request->noPO[$i],
+                    'nama_barang' => $request->nama_barang[$i],
+                    'jumlah' => $request->jumlah[$i],
+                    'rate' => $request->rate[$i],
+                    'amount' => $request->amount[$i],
+                    'keterangan_barang' => $request->keterangan[$i],
                 ]
             );
+        }
 
-            $user = Auth::user();
-            Log::create(
-                [
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'divisi' => $user->divisi,
-                    'deskripsi' => 'Create PO',
-                    'status' => '2',
-                    'ip' => $request->ip()
+        PO::create(
+            [
+                'no_PO' => $request->no_PO,
+                'instansi' => $request->instansi,
+                'tgl_pemasangan' => $request->tgl_transaksi,
+                'pic_marketing' => $user->name,
+                'status' => '1'
+            ]
+        );
 
-                ]
-            );
-        } elseif ($request->jenis_simpan == '2') {
+        $user = Auth::user();
+        Log::create(
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Create PO',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+        } else {
             $jumlah_data = count($request->noPO);
             for ($i = 0; $i < $jumlah_data; $i++) {
                 DetailPO::create(
@@ -131,6 +120,49 @@ class PoController extends Controller
 
         return redirect('/po');
     }
+
+    public function adddraft2(Request $request)
+    {
+        $user = Auth::user();
+        $jumlah_data = count($request->noPO);
+        for ($i = 0; $i < $jumlah_data; $i++) {
+            DetailPO::create(
+                [
+                    'no_PO' => $request->noPO[$i],
+                    'nama_barang' => $request->nama_barang[$i],
+                    'jumlah' => $request->jumlah[$i],
+                    'rate' => $request->rate[$i],
+                    'amount' => $request->amount[$i],
+                    'keterangan_barang' => $request->keterangan[$i],
+                ]
+            );
+        }
+
+        PO::create(
+            [
+                'no_PO' => $request->no_PO,
+                'instansi' => $request->instansi,
+                'tgl_pemasangan' => $request->tgl_transaksi,
+                'pic_marketing' => $user->name,
+                'status' => '7'
+            ]
+        );
+
+        $user = Auth::user();
+        Log::create(
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Create Draft PO',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+        return redirect('/po');
+    }
+
     public function editpo($no_PO)
     {
         $data_detail = DetailPO::where('no_PO', $no_PO)->get();
@@ -285,7 +317,7 @@ class PoController extends Controller
 
             ]
         );
-        
+
         return back()->with('success', "Data telah terhapus");
     }
 
@@ -300,10 +332,10 @@ class PoController extends Controller
     {
         $user = Auth::user();
 
-    PO::where('no_PO', $no_PO)
+        PO::where('no_PO', $no_PO)
             ->update(
                 [
-                    
+
                     'status' => '1'
                     //status ganti 1
                 ]
@@ -327,12 +359,12 @@ class PoController extends Controller
         // dd($request->non);
         $user = Auth::user();
         PO::where('id_PO', $id_PO)
-                ->update([
-                    'status' => '7',
-                    'alasan' => $request->alasan,
-                ]);
+            ->update([
+                'status' => '7',
+                'alasan' => $request->alasan,
+            ]);
         Log::create(
-                    [
+            [
                 'name' => $user->name,
                 'email' => $user->email,
                 'divisi' => $user->divisi,
