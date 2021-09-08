@@ -191,10 +191,10 @@
                             <div class="row">
 
                                 <div class="form-group" style="text-align:right;">
+                                    <button class="btn btn-default" name="draft" type="submit" value="draft" id="draft">Draft</button>
                                     <button class="btn btn-success mr-5" name="proses" type="submit" value="proses" id="proses">
                                         Simpan
                                     </button>
-                                    <button class="btn btn-default" name="draft" type="submit" value="draft" id="draft">Draft</button>
                                 </div>
                                 <!-- <div class="col-md-2" >
                                     <button class="btn btn-default" name="submit" type="submit">

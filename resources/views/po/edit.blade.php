@@ -151,7 +151,9 @@
                                                     <td> <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Amount">{{$detail->amount}}</a></td>
                                                     <td>
                                                         <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="#hapus{{ $detail->id_po }}" action="( {{url('deletepo')}}/{{ $detail->id_po}})"><i class="fa fa-trash"></i></button>
-                                                    @include ('po.hapus')
+                                                        <button class="btn btn-primary btn-icon-anim btn-square" data-toggle="modal" data-target="#editdraft{{ $detail->id_po }}" action="( {{url('editdraft')}}/{{ $detail->id_po}})"><i class="fa fa-pencil"></i></button>
+                                                        @include ('po.hapus')
+                                                        @include ('po.editdraft')
                                                     </td>
                                                 </tr>
                                                 @endforeach
