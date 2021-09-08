@@ -139,7 +139,7 @@ class PoController extends Controller
         return view('po/edit', compact('data_po', 'data_detail', 'tanggal'));
     }
 
-    public function confirm(Request $request)
+    public function confirmpo(Request $request)
     {
         // dd($request->non);
         $user = Auth::user();

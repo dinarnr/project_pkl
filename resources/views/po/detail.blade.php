@@ -271,7 +271,7 @@
                                         <div class="text-left">
                                             <h6 class="txt-dark"><strong>PENAWARAN</strong></h6>
                                         </div>
-                                        <form action="{{ url('confirm/{id_PO}') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ url('confirmpo/{id_PO}') }}" method="POST" enctype="multipart/form-data">
                                         @foreach ($data_po as $data_po)
                                         <tr>
                                             <div class="">
