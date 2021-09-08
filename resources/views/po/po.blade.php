@@ -89,9 +89,13 @@
                                                       @if (empty($data_po->status))
                                                         <a href="po/edit/{{ $data_po->no_PO }}"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fa fa-edit"></i></button></a>
                                                       @endif
-                                                      <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="#cancel{{ $data_po->id_po }}" action="( {{url('cancelPO')}}/{{ $data_po->id_po }})"><i class="fa fa-times"></i></button>
-
-                                                    </td>
+                                                      @if (($data_po->status >= 1))
+                                                        @if ($data_po->status != 7)
+                                                        <button class="btn btn-danger btn-icon-anim btn-square" data-toggle="modal" data-target="#batal{{ $data_po->id_PO }}" action="( {{url('batal')}}/{{ $data_po->id_PO }})"><i class="fa fa-times"></i></button>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                @include('po.batal')
                                                 </tr>
                                             </tbody>
                                             @endforeach

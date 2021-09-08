@@ -285,8 +285,7 @@ class PoController extends Controller
 
             ]
         );
-
-
+        
         return back()->with('success', "Data telah terhapus");
     }
 
@@ -304,7 +303,9 @@ class PoController extends Controller
     PO::where('no_PO', $no_PO)
             ->update(
                 [
-                    'status' => '2'
+                    
+                    'status' => '1'
+                    //status ganti 1
                 ]
             );
 
@@ -314,6 +315,28 @@ class PoController extends Controller
                 'email' => $user->email,
                 'divisi' => $user->divisi,
                 'deskripsi' => 'Update Draft to Proses',
+                'status' => '2',
+                'ip' => $request->ip()
+
+            ]
+        );
+        return redirect('/po');
+    }
+    public function batal(Request $request, $id_PO)
+    {
+        // dd($request->non);
+        $user = Auth::user();
+        PO::where('id_PO', $id_PO)
+                ->update([
+                    'status' => '7',
+                    'alasan' => $request->alasan,
+                ]);
+        Log::create(
+                    [
+                'name' => $user->name,
+                'email' => $user->email,
+                'divisi' => $user->divisi,
+                'deskripsi' => 'Update Cancel PO',
                 'status' => '2',
                 'ip' => $request->ip()
 

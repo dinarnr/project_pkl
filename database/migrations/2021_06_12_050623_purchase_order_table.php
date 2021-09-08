@@ -23,6 +23,7 @@ class PurchaseOrderTable extends Migration
             $table->string('ppn')->nullable();
             $table->string('pph')->nullable();
             $table->string('balance')->nullable();
+            $table->string('alasan')->nullable();
             $table->string('pic_marketing',50)->nullable();
             $table->string('pic_warehouse',50)->nullable();
             $table->string('pic_admin',50)->nullable();

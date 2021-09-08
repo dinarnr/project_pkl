@@ -130,6 +130,11 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('Confirm/{id_pengajuan}', 'App\Http\Controllers\PengajuanController@Confirm');
     Route::post('Reject/{id_pengajuan}', 'App\Http\Controllers\PengajuanController@Reject');
 
+    Route::get('/pengpembelian', 'App\Http\Controllers\PengajuanController@pengpembelian');
+    Route::get('/addpembelian', 'App\Http\Controllers\PengajuanController@addpembelian');
+
+
+
     //PEMBELIAN
     Route::get('/pembelian', 'App\Http\Controllers\PembelianController@pembelian');
     Route::get('/addinvoice/{id_PO}','App\Http\Controllers\PembelianController@addinvoice');
@@ -168,8 +173,10 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::get('/add/{no_PO}', 'App\Http\Controllers\PoController@add');
     Route::post('/add2', 'App\Http\Controllers\PoController@add2')->name('add2');
     Route::post('/draft/{no_PO}', 'App\Http\Controllers\PoController@draft')->name('draft');
+    Route::post('batal/{id_PO}', 'App\Http\Controllers\PoController@batal');
 
 
+    
     // ADMINISTRASI
     Route::get('administrator', 'App\Http\Controllers\AdministratorController@users');
     Route::get('log', 'App\Http\Controllers\AdministratorController@log');

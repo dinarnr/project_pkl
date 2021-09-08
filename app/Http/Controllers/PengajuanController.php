@@ -8,6 +8,7 @@ use App\Models\Master;
 use App\Models\Pembelian;
 use App\Models\Pengajuan;
 use App\Models\PO;
+use App\Models\Instansi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Input\Input;
@@ -350,5 +351,64 @@ class PengajuanController extends Controller
         );
 
         return back()->with('success', "Data telah diperbarui");
+    }
+
+    //-----------------------------------------pengajuan pembelian---------------------------------------------------------------//
+    public function pengpembelian()
+    {
+        $pembelian= Pengajuan::all();
+        return view('pengajuan/pengpembelian', compact('pembelian'));
+    }
+
+    public function addpembelian()
+    {
+        $kode = strtoupper(substr("PEM", 0, 3));
+        $check = count(Pengajuan::where('noPO', 'like', "%$kode%")->get()->toArray());
+        $angka = sprintf("%04d", (int)$check + 1);
+        $no_peng = $kode . "" . $angka;
+
+        $pembelian= Pengajuan::all();
+        $noPO =PO::all();
+        $data_instansi = Instansi::all();
+        // dd($no_peng);
+    
+        return view('pengajuan/addpembelian', compact('pembelian','noPO','data_instansi', 'no_peng'));
+    }
+
+    public function addpembelian2(Request $request)
+    {
+       // dd( $request->kode_barang);
+       $jumlah_data = count($request->no_peng);
+       for ($i = 0; $i < $jumlah_data; $i++) {
+           DetailPengajuan::create(
+               [
+                   'no_pengajuan' => $request->no_peng[$i],
+                   'jumlah' => $request->jumlah[$i],
+                   'kode_barang' => $request->kode_barang[$i],
+                   'nama_barang' => $request->nama_barang[$i],
+                   'keterangan' => $request->keterangan[$i],
+               ]
+           );
+       }
+           Pengajuan::create(
+               [
+                   'no_pengajuan' => $request->no_pengajuan,
+                   'nama_supplier' => $request->nama_supplier,
+                   'pengirim' => $request->pengirim,
+                   'penerima' => $request->penerima,
+               ]);
+           
+           $user = Auth::user();
+           Log::create(
+               [
+               'name' => $user->name,
+               'email' => $user->email,
+               'divisi' => $user->divisi,
+               'deskripsi' => 'Create Masuk Baru',
+               'status' => '2',
+               'ip'=> $request->ip()
+           ]);
+
+       return redirect('/pengpembelian');
     }
 }
