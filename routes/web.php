@@ -166,7 +166,7 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('/addpo2', 'App\Http\Controllers\PoController@addpo2')->name('addpo2');
     Route::get('po/detail/{no_PO}', 'App\Http\Controllers\PoController@detailpo');
     // Route::post('editpo/{id_PO}', 'App\Http\Controllers\PoController@editpo');
-    Route::post('confirm/{id_PO}', 'App\Http\Controllers\PoController@confirm');
+    Route::post('confirmpo/{id_PO}', 'App\Http\Controllers\PoController@confirmpo');
     Route::post('reject/{id_PO}', 'App\Http\Controllers\PoController@reject');
     Route::get('po/edit/{no_PO}', [POController::class, 'editpo']);
     Route::delete('deletepo/{id_po}', 'App\Http\Controllers\POController@deletepo');
