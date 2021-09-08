@@ -212,12 +212,13 @@
 
                     </div>
                     <div class="pull-right hide-from-printer">
-                    <form action="{{ url('draft/{no_PO}') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                        <button type="submit" class="btn btn-primary mr-10">
+
+                
+                        <button type="submit" class="btn btn-primary mr-10" data-toggle="modal" data-target="#draft{{ $data_po->no_PO }}" action="( {{url('draft')}}/{{ $data_po->no_PO }})">
                             Proses
                         </button>
-                    </form>
+                        @include('po.proses')
+                     <!-- <form action="{{ url('draft/{no_PO}') }}" method="POST" enctype="multipart/form-data"> -->
 
                     </div>
 

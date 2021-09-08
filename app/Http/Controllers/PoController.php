@@ -303,6 +303,7 @@ class PoController extends Controller
     PO::where('no_PO', $no_PO)
             ->update(
                 [
+                    
                     'status' => '1'
                     //status ganti 1
                 ]
