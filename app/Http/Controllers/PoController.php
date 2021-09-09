@@ -376,4 +376,32 @@ class PoController extends Controller
         );
         return redirect('/po');
     }
+
+    public function editisidraft(Request $request, $id_po )
+    {
+        // dd($request->edit_nama);
+        DetailPO::where('id_po', $id_po)
+            ->update([
+                'nama_barang' => $request->edit_nama,
+                'keterangan_barang' => $request->edit_keterangan,
+                'jumlah' => $request->edit_jumlah,
+                'rate' => $request->edit_rate,
+                'amount' => $request->edit_amount
+            ]);
+
+            $user = Auth::user();
+        Log::create(
+            [
+            'name' => $user->name,
+            'email' => $user->email,
+            'divisi' => $user->divisi,
+            'deskripsi' => 'Update Draft',
+            'status' => '2',
+            'ip'=> $request->ip()
+
+            ]
+        );
+
+        return redirect()->back();
+    }
 }

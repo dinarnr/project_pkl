@@ -175,6 +175,7 @@ Route::group(['middleware' => 'auth', 'cekdivisi:teknisi,warehouse,marketing,adm
     Route::post('/draft/{no_PO}', 'App\Http\Controllers\PoController@draft')->name('draft');
     Route::post('batal/{id_PO}', 'App\Http\Controllers\PoController@batal');
     Route::post('/adddraft2', 'App\Http\Controllers\PoController@adddraft2')->name('adddraft2');
+    Route::post('/editisidraft/{id_po}', 'App\Http\Controllers\PoController@editisidraft')->name('editisidraft');
 
 
     
