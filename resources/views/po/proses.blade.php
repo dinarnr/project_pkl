@@ -1,3 +1,5 @@
+
+
 <div class="modal fade" id="draft{{ $data_po->no_PO }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

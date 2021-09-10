@@ -167,7 +167,7 @@
                                     <label for="ppn" class="col-sm-4 control-label">PPn (%)</label>
                                     <div class="">
                                         <div class="input-group">
-                                            <input type="email" class="form-control" id="ppn" placeholder="" readonly>
+                                            <input type="text" class="form-control" id="ppn" placeholder="" >
                                         </div>
                                     </div>
                                 </div>

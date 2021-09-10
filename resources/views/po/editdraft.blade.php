@@ -41,15 +41,15 @@
         </div>
     </div>
 </div>
-<!-- <script>
-    $(document).ready(function() {
-        $(".a2, .b2").on("keydown keyup", function(event) {
-            var jumlah = $("#jumlah").val();
-            var rate = $("#rate").val().split('.').join('');
-            var reverse = (jumlah * rate).toString().split('').reverse().join('');
-            amount = reverse.match(/\d{1,3}/g);
-            amount = amount.join('.').split('').reverse().join('');
-            $("#amount").val(amount);
-        });
-    });
-</script> -->
+<script>
+//     $(document).ready(function() {
+//         $(".a2, .b2").on("keydown keyup", function(event) {
+//             var jumlah = $("#jumlah").val();
+//             var rate = $("#rate").val().split('.').join('');
+//             var reverse = (jumlah * rate).toString().split('').reverse().join('');
+//             amount = reverse.match(/\d{1,3}/g);
+//             amount = amount.join('.').split('').reverse().join('');
+//             $("#amount").val(amount);
+//         });
+//     });
+// </script>

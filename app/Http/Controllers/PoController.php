@@ -53,6 +53,7 @@ class PoController extends Controller
                     'jumlah' => $request->jumlah[$i],
                     'rate' => $request->rate[$i],
                     'amount' => $request->amount[$i],
+                    'keterangan' => '-',
                     'keterangan_barang' => $request->keterangan[$i],
                 ]
             );
@@ -173,14 +174,16 @@ class PoController extends Controller
 
     public function confirmpo(Request $request)
     {
-        // dd($request->non);
+        // dd($request->is_active);
         $user = Auth::user();
-        DetailPO::whereIn('id_po', $request->is_active)
-            ->update(array(
+        DetailPO::where('id_po', $request->is_active)
+            ->update(
+                [
                 'status' => '2'
-            ));
+                ]
+            );
 
-        // DetailPO::whereIn('id_po', $request->non)
+        // DetailPO::whereIn('id_po', $request->is_active)
         // ->update(array(
         //         'status'=> '1'
         // ));  
@@ -387,6 +390,31 @@ class PoController extends Controller
                 'jumlah' => $request->edit_jumlah,
                 'rate' => $request->edit_rate,
                 'amount' => $request->edit_amount
+            ]);
+
+            $user = Auth::user();
+        Log::create(
+            [
+            'name' => $user->name,
+            'email' => $user->email,
+            'divisi' => $user->divisi,
+            'deskripsi' => 'Update Draft',
+            'status' => '2',
+            'ip'=> $request->ip()
+
+            ]
+        );
+
+        return redirect()->back();
+    }
+
+    public function addket(Request $request, $id_po )
+    {
+        // dd($request->edit_nama);
+        DetailPO::where('id_po', $id_po)
+            ->update([
+                
+                'keterangan' => $request->edit_keterangan
             ]);
 
             $user = Auth::user();

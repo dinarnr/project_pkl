@@ -271,7 +271,7 @@
                                         <div class="text-left">
                                             <h6 class="txt-dark"><strong>PENAWARAN</strong></h6>
                                         </div>
-                                        <form action="{{ url('confirmpo/{id_PO}') }}" method="POST" enctype="multipart/form-data">
+                                        <!-- <form action="{{ url('confirmpo/{id_PO}') }}" method="POST" enctype="multipart/form-data"> -->
                                         @foreach ($data_po as $data_po)
                                         <tr>
                                             <div class="">
@@ -298,7 +298,8 @@
                                     <th>Deskripsi</th>
                                     <th>Keterangan</th>
                                     <th>Qty</th>
-                                    <th>#</th>
+                                    <th>√</th>
+                                    <th>Edit/th>
                                     <!-- <th colspan="3">Aksi</th> -->
                                 </tr>
                             </thead>
@@ -311,8 +312,16 @@
                                         <td>
                                             <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Nama barang">{{$detail->nama_barang}}</a><br>&nbsp;&nbsp;- {{$detail->keterangan_barang}}</br>
                                         </td>
+                                        
                                         <td>
-                                            <a href="#" id="username2" style="font-weight:bold" data-type="text" data-pk="1" data-title="Keterangan">{{$detail->keterangan}}</a>
+                                            @if(empty($detail->keterangan))
+                                            <!-- <button type="button" class="btn btn-primary btn-icon-anim" data-toggle="modal" data-target="#addket{{ $detail->id_po }}" action="( {{url('addket')}}/{{ $detail->id_po}})" name="keterangan" id="keterangan"><i class="fa fa-pencil"></i></button> -->
+                                            <!-- <a href="#" class="mr-25" data-toggle="modal" data-target="#addket{{ $detail->id_po }}" action="( {{url('addket')}}/{{ $detail->id_po}})"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>  -->
+                                            <!-- <button type="button" class="btn btn-primary btn-icon-anim" data-toggle="modal" data-target="#addket{{ $detail->id_po }}" action="( {{url('addket')}}/{{ $detail->id_po}})" name="keterangan" id="keterangan">Tambah Keterangan</button> -->
+                                            @else 
+                                            <a>{{$detail->keterangan}}</a>
+                                            @endif
+                                            @include('po.addket')
                                         </td>
                                         <td>
                                             <a href="#" id="" style="font-weight:bold" data-type="text" data-pk="1" data-title="Jumlah">{{$detail->jumlah}}</a>
@@ -320,6 +329,12 @@
                                         <td>
                                             <input type="checkbox" id="is_active[]" name="is_active[]" value="{{$detail->id_po}}" />
                                             <input type="hidden" id="non[]" name="non[]" value="{{$detail->id_po}}">
+
+                                        </td>
+                                        <td>
+                                        <a href="#" class="mr-25" data-toggle="modal" data-target="#addket{{ $detail->id_po }}" action="( {{url('addket')}}/{{ $detail->id_po}})"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> 
+    
+                                        <!-- <button type="button" class="btn btn-primary btn-icon-anim" data-toggle="modal" data-target="#addket{{ $detail->id_po }}" action="( {{url('addket')}}/{{ $detail->id_po}})" name="keterangan" id="keterangan"><i class="fa fa-pencil"></i></button> -->
                                         </td>
                                     </tr>
                                     @endforeach
@@ -386,6 +401,8 @@
 
 <div class="pull-right hide-from-printer">
     @if (auth()->user()->divisi == "warehouse")
+    <form action="{{ url('confirmpo/{id_PO}') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <button type="submit" class="btn btn-primary mr-10">
         Proses
     </button>

@@ -119,7 +119,7 @@
                                     <div class="col-md-12">
 
                                         <table id="myTable1" class="table table display pb-30">
-                                            <thead>
+                                        <thead>
                                                 <tr>
                                                     <th>no</th>
                                                     <th>Deskripsi</th>
@@ -131,7 +131,7 @@
                                                     <!-- <th colspan="3">Aksi</th> -->
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                                <tbody>
                                                 <?php $no = 1; ?>
                                                 @foreach ($data_detail as $detail)
                                                 <tr>
