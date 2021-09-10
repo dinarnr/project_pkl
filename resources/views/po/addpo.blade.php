@@ -160,6 +160,7 @@
                                     <div class="">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="total" name='total' placeholder="" readonly>
+                                            <input type="hidden" class="form-control" id="total1" name='total' placeholder="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -282,11 +283,13 @@
         var noPO = document.getElementById('noPO').value;
         var nama_barang = document.getElementById('nama_barang').value;
         var jumlah = document.getElementById('jumlah').value;
+        var rate1 = document.getElementById('rate').value.replace(/[^,\d]/g, '').toString();
+        var amount1 = document.getElementById('amount').value.replace(/[^,\d]/g, '').toString();
         var rate = document.getElementById('rate').value;
         var amount = document.getElementById('amount').value;
         var keterangan = document.getElementById('keterangan').value;
         var total = document.getElementById('total').value;
-        addrow(noPO, nama_barang, jumlah, keterangan, rate, amount);
+        addrow(noPO, nama_barang, jumlah, keterangan, rate, amount, rate1, amount1);
 
     }
     var i = 0;
@@ -306,17 +309,20 @@
         return rupiah;
     }
 
-    function addrow(noPO, nama_barang, jumlah, keterangan, rate, amount) {
+    function addrow(noPO, nama_barang, jumlah, keterangan, rate, amount, rate1, amount1) {
         i++;
         $('#TabelDinamis').append('<tr id="row' + i + '"><td style="display:none;"><input type="text" style="outline:none;border:0;" readonly name="noPO[]" id="noPO" value="' + noPO +
             '"><td><input type="text" style="outline:none;border:0; font-weight: bold;" readonly name="nama_barang[]" id="nama_barang" value="' + nama_barang +
             '"><br><input type="text" style="outline:none;border:0;" name="keterangan[]" id="keterangan" value="    ' + keterangan +
             '"></br ></td><td><input type="text" style="outline:none;border:0;" readonly name="jumlah[]" id="jumlah" value="' + jumlah +
             '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="rate[]" id="rate" value="' + rate +
+            '"></td><td style="display:none;">Rp <input type="text" style="outline:none;border:0;" readonly name="rate1[]" id="rate" value="' + rate1 +
             '"></td><td>Rp <input type="text" style="outline:none;border:0;" readonly name="amount[]" id="amount' + i + '" value="' + amount +
+            '"></td><td style="display:none;">Rp <input type="text" style="outline:none;border:0;" readonly name="amount1[]" id="amount' + i + '" value="' + amount1 +
             '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
         total = (parseInt(total) + parseInt(amount.split('.').join(''))).toString().split('').join('');
         $("#total").val(pecah(total));
+        $("#total1").val(total);
         var ppn = $('#ppn').val();
         var pph = $('#pph').val();
         $("#balance").val(pecah(parseInt(total) + ((ppn/100)*parseInt(total)) + ((pph/100)*parseInt(total))));
