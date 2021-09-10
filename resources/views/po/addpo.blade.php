@@ -185,6 +185,7 @@
                                     <div class="">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="balance" placeholder="" readonly>
+                                            <input type="hidden" class="form-control" id="balance1" placeholder="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -323,16 +324,24 @@
         total = (parseInt(total) + parseInt(amount.split('.').join(''))).toString().split('').join('');
         $("#total").val(pecah(total));
         $("#total1").val(total);
+
         var ppn = $('#ppn').val();
         var pph = $('#pph').val();
         $("#balance").val(pecah(parseInt(total) + ((ppn/100)*parseInt(total)) + ((pph/100)*parseInt(total))));
+        var balance = $("#balance").val();
+        $("#balance1").val(balance.replace(/[^,\d]/g, '').toString());
     };
     $(document).on('click', '.remove_row', function() {
         var row_id = $(this).attr("id");
         total = (parseInt(total) - parseInt($('#amount' + row_id + '').val().split('.').join(''))).toString().split('').join('');
         $("#total").val(pecah(total));
+        $("#total1").val(total);
+
         var pph = $('#pph').val();
         $("#balance").val(pecah(parseInt(total) + ((ppn/100)*parseInt(total)) + ((pph/100)*parseInt(total))));
+        var balance = $("#balance").val();
+        $("#balance1").val(balance.replace(/[^,\d]/g, '').toString());
+
         $('#row' + row_id + '').remove();
     });
 
